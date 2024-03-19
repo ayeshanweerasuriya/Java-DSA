@@ -1,0 +1,56 @@
+                // System.out.print("Customer Name: " + name);
+                // System.out.println("\nCustomer Phone Number: " + number);
+
+                // %d for Integer Values || %s for Strings || %f for Floating Point Values like
+                // double
+                // System.out.printf("Basmathi Quantity:\t%d\t%f\t%f%n", basmathiQuantity,
+                // basmathiPrice,
+                // basmathiTotalPrice);
+                // System.out.printf("Dhal Quantity:\t%d\t%f\t%f%n", dhalQuantity, dhalPrice,
+                // dhalTotalPrice);
+                // System.out.printf("Sugar Quantity:\t%d\t%f\t%f%n", sugarQuantity, sugarPrice,
+                // sugarTotalPrice);
+                // System.out.printf("Higland Quantity:\t%d\t%f\t%f%n", highlandQuantity,
+                // highlandPrice,
+                // highlandTotalPrice);
+                // System.out.printf("Yoghurt Quantity:\t%d\t%f\t%f%n", yogurtQuantity,
+                // yoghurtPrice, yogurtTotalPrice);
+                // System.out.printf("Flour Quantity:\t%d\t%f\t%f%n", flourQuantity, flourPrice,
+                // flourTotalPrice);
+                // System.out.printf("Soap Quantity:\t%d\t%f\t%f%n", soapQuantity, soapPrice,
+                // soapTotalPrice);
+                // System.out.println("\nTotal Price: " + totalPrice);
+                // System.out.println("Total Discount: " + totalDiscount);
+                // System.out.println("Price: " + finalPrice);
+
+
+                System.out.println("+---------------------------------------------------------------+");
+                System.out.println("|\t\t _ __  __          _____ _______ \t\t|");
+                System.out.println("|\t\t(_)  \\/  |   /\\   |  __ \\__   __|\t\t|");
+                System.out.println("|\t\t _| \\  / |  /  \\  | |__) | | |   \t\t|");
+                System.out.println("|\t\t| | |\\/| | / /\\ \\ |  _  /  | |   \t\t|");
+                System.out.println("|\t\t| | |  | |/ ____ \\| | \\ \\  | |   \t\t|");
+                System.out.println("|\t\t|_|_|  |_/_/    \\_\\_|  \\_\\ |_|   \t\t|");
+                System.out.println("|\t\t   225,Galle Road,Panadura.\t\t\t|");
+                System.out.println("|\t\t\t\t\t\t\t\t|");
+                System.out.println("+---------------------------------------------------------------+");
+                System.out.printf("|\t\t\t# Tel  : %s\t\t\t|%n", number);
+                System.out.printf("|\t\t\t# Name : %s\t\t\t\t|%n", name);
+                System.out.println("+----------------+-------------+---------------+----------------+");
+                System.out.println("|                |     Qty     |   unit price  |      Price     |");
+                System.out.println("+----------------+-------------+---------------+----------------+");
+                System.out.printf("| # Basmathi     |    %d       |       %f      |      %f        |", basmathiQuantity, basmathiPrice, basmathiTotalPrice);
+                System.out.println("|                |             |               |                |");
+                System.out.println("| # Dhal         |             |               |                |");
+                System.out.println("|                |             |               |                |");
+                System.out.println("| # Sugar        |             |               |                |");
+                System.out.println("|                |             |               |                |");
+                System.out.println("| # Highland     |             |               |                |");
+                System.out.println("|                |             |               |                |");
+                System.out.println("| # Yogurt       |             |               |                |");
+                System.out.println("|                |             |               |                |");
+                System.out.println("| # Flour        |             |               |                |");
+                System.out.println("|                |             |               |                |");
+                System.out.println("| # Soap         |             |               |                |");
+                System.out.println("|                |             |               |                |");
+                System.out.println("+----------------+-------------+---------------+----------------+");
