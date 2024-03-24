@@ -1,13 +1,32 @@
 import java.util.*;
-class Example{
-	public static void main(String args[]){
-		Scanner input=new Scanner(System.in);
-		System.out.print("Input an integer : ");
-		int num=input.nextInt();
-		System.out.println("A");
-		System.out.println("B");
-		if (num > 100) System.out.println("C");
-		System.out.println("D");
-		System.out.println("E");
+
+class Example {
+	public static void main(String args[]) {
+		int x = 100;
+		{
+			int y = 200;
+			x++;
+			y++;
+			System.out.println(x + " " + y); // 101 201
+		}
+
+		{
+			int y = 200;
+			x++;
+			y++;
+			System.out.println(x + " " + y);// 102 201
+		}
+		{
+			int y = 200;
+			x++;
+			y++;
+			System.out.println(x + " " + y);// 103 201
+		}
+		{
+			int y = 200;
+			x++;
+			y++;
+			System.out.println(x + " " + y);// 104 201
+		}
 	}
 }
