@@ -4,17 +4,15 @@ public class Sample {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.print("Type the amount of bytes: ");
-        int bytes = scan.nextInt();
+        System.out.print("Enter the tax-inclusive price in dollars: ");
+        double taxInclusivePrice = scan.nextDouble();
         scan.close();
 
-        double kilobytes = bytes / 1024.0;
-        double megabytes = kilobytes / 1024.0;
-        double gigabytes = megabytes / 1024.0;
+        double actualPrice = taxInclusivePrice / 1.10;
+        double salesTax = taxInclusivePrice - actualPrice;
 
-        System.out.println("\nSize in Kilobytes (KB): " + kilobytes + " kb");
-        System.out.println("Size in Megabytes (MB): " + megabytes + " mb");
-        System.out.println("Size in Gigabytes (GB): " + gigabytes + " gb");
+        System.out.printf("Actual Price is: $%.2f%n", actualPrice);
+        System.out.printf("Sales Tax is: $%.2f%n", salesTax);
 
-        }
+    }
 }
