@@ -48,6 +48,7 @@ public class SalarySystem {
 
             System.out.print("\nYou have to pay Income Tax per month: " + Math.round(tax));
 
+            // Calculate Annual Bonus
         } else if (option == 2) {
             System.out.println("\n-----------------------------------------------------------------------------------");
             System.out.println("|                              Calculate Annual Bonus                             |");
@@ -80,6 +81,7 @@ public class SalarySystem {
 
             System.out.println("\nAnnual Bonus: " + annual_bonus);
 
+            // Calculate Loan Amount
         } else if (option == 3) {
             System.out.println("\n-----------------------------------------------------------------------------------");
             System.out.println("|                              Calculate Loan Amount                              |");
@@ -92,23 +94,33 @@ public class SalarySystem {
             double salary = scan.nextDouble();
             scan.nextLine();
 
-            if (salary > 50000) {
-                System.out.print("Enter number of years - ");
-                int years = scan.nextInt();
-                scan.nextLine();
-
-                double loan_amount = 0;
-
-                int n = years * 12;
-                double r = 0.15;
-
-                loan_amount = 1 - (1 / (1 + Math.pow((r / 12), n))) / (r / 12);
-                System.out.println("You can get loan ammount: " + loan_amount);
+            if (salary < 50000) {
+                System.out.println("You cannot get a loan because your salary is less than Rs.50 000...");
 
             } else {
-                System.out.println("You cannot get a loan because your salary is less than Rs.50 000...");
+                System.out.print("Enter number of years - ");
+                int years = scan.nextInt();
+
+                if (years > 5) {
+                    System.out.println("Maximum number of years allowed is 5.");
+
+                } else {
+                    double monthly_installment = 0.6 * salary;
+                    double annual_interest_rate = 0.15;
+                    int months = years * 12;
+                    double r = annual_interest_rate / 12;
+
+                    // [-months] discounting factor for the present value over months period
+                    double loan_amount = monthly_installment * ((1 - Math.pow(1 + r, -months)) / r);
+                    loan_amount = Math.round(loan_amount / 1000.0) * 1000;
+
+                    System.out.println("You can get a Loan Amount: " + Math.round(loan_amount));
+
+                }
             }
 
         }
+
+        scan.close();
     }
 }
