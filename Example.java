@@ -4,28 +4,27 @@ class Example {
     public static void main(String args[]) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.print("Enter the number of copies: ");
-        int copies_amount = scan.nextInt();
+        System.out.print("Enter the value for R (0-255): ");
+        int r = scan.nextInt();
+
+        System.out.print("Enter the value for G (0-255): ");
+        int g = scan.nextInt();
+
+        System.out.print("Enter the value for B (0-255): ");
+        int b = scan.nextInt();
+
         scan.close();
 
-        double price_per_copy = 0;
+        double w = Math.max(r / 255.0, Math.max(g / 255.0, b / 255.0));
+        double c = (w - (r / 255.0)) / w;
+        double m = (w - (g / 255.0)) / w;
+        double y = (w - (b / 255.0)) / w;
+        double k = 1 - w;
 
-        if (copies_amount >= 0 && copies_amount <= 99) {
-            price_per_copy = 30.00;
-
-        } else if (copies_amount >= 100 && copies_amount <= 499) {
-            price_per_copy = 28.00;
-
-        } else if (copies_amount >= 500 && copies_amount <= 799) {
-            price_per_copy = 27.00;
-
-        } else if (copies_amount >= 800 && copies_amount <= 1000) {
-            price_per_copy = 26.00;
-
-        } else {
-            price_per_copy = 25.00;
-        }
-
-        System.out.printf("\nTotal price: %.2f", (copies_amount * price_per_copy));
+        System.out.println("CMYK values:");
+        System.out.printf("C: %.2f\n", c);
+        System.out.printf("M: %.2f\n", m);
+        System.out.printf("Y: %.2f\n", y);
+        System.out.printf("K: %.2f\n", k);
     }
 }
