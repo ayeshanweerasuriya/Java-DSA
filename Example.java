@@ -4,27 +4,21 @@ class Example {
     public static void main(String args[]) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.print("Enter the value for R (0-255): ");
-        int r = scan.nextInt();
-
-        System.out.print("Enter the value for G (0-255): ");
-        int g = scan.nextInt();
-
-        System.out.print("Enter the value for B (0-255): ");
-        int b = scan.nextInt();
-
+        System.out.print("Enter the weight of the parcel (kg): ");
+        double weight = scan.nextDouble();
         scan.close();
 
-        double w = Math.max(r / 255.0, Math.max(g / 255.0, b / 255.0));
-        double c = (w - (r / 255.0)) / w;
-        double m = (w - (g / 255.0)) / w;
-        double y = (w - (b / 255.0)) / w;
-        double k = 1 - w;
+        double courier_charge = 0;
 
-        System.out.println("CMYK values:");
-        System.out.printf("C: %.2f\n", c);
-        System.out.printf("M: %.2f\n", m);
-        System.out.printf("Y: %.2f\n", y);
-        System.out.printf("K: %.2f\n", k);
+        if (weight <= 5) {
+            courier_charge = 500;
+            
+        } else {
+            double extra_Kg = weight - 5;
+            courier_charge = 500 + extra_Kg * 100;
+        }
+
+        System.out.println("\nWeight of the parcel: " + weight + "kg");
+        System.out.printf("Courier charge for the parcel: Rs.%.2f", courier_charge);
     }
 }
