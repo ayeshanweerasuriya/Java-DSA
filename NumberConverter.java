@@ -86,29 +86,41 @@ public class NumberConverter {
                         System.out.println("|                     Binary Converter                   |");
                         System.out.println("+--------------------------------------------------------+");
 
-                        System.out.print("\nEnter an Binary number: ");
-                        String binaryStr = scan.nextLine();
+                        // Input binary number
+                        System.out.print("Enter a binary number: ");
+                        String binaryString = scan.nextLine();
+                        scan.nextLine();
 
+                        // Check if the input is a valid binary number
                         boolean isValidBinary = true;
-                        for (int i = 0; i < binaryStr.length(); i++) {
-                            char digit = binaryStr.charAt(i);
+                        for (char digit : binaryString.toCharArray()) {
                             if (digit != '0' && digit != '1') {
                                 isValidBinary = false;
                                 break;
                             }
                         }
 
-                        if (isValidBinary) {
+                        if (!isValidBinary) {
+                            System.out.println("Invalid input...");
+                            System.out.print("\nDo you want to input number again (Y/N) -> ");
+                            secondChoice = scan.next().charAt(0);
+
+                        } else {
+                            // Convert binary to decimal
                             int decimal = 0;
-                            int base = 1;
-                            for (int i = binaryStr.length() - 1; i >= 0; i--) {
-                                int digit = binaryStr.charAt(i) - '0';
-                                decimal += digit * base;
-                                base *= 2;
+                            for (int i = binaryString.length() - 1, j = 0; i >= 0; i--, j++) {
+                                int digit = binaryString.charAt(i) - '0';
+                                decimal += digit * Math.pow(2, j);
                             }
                             System.out.println("Decimal number: " + decimal);
-                            System.out.println("Octal number: " + Integer.toOctalString(decimal));
-                            System.out.println("Hexadecimal number: " + Integer.toHexString(decimal).toUpperCase());
+
+                            // Convert binary to octal
+                            int octal = Integer.parseInt(Integer.toOctalString(decimal));
+                            System.out.println("Octal number: " + octal);
+
+                            // Convert binary to hexadecimal
+                            String hexadecimal = Integer.toHexString(decimal);
+                            System.out.println("Hexadecimal number: " + hexadecimal.toUpperCase());
 
                             System.out.print("\nDo you want to go to homepage (Y/N) -> ");
                             secondChoice = scan.next().charAt(0);
@@ -117,11 +129,6 @@ public class NumberConverter {
                             } else if (secondChoice == 'n' || secondChoice == 'N') {
                                 secondChoice = 'Y';
                             }
-
-                        } else {
-                            System.out.println("\tInvalid input...");
-                            System.out.print("\nDo you want to input number again (Y/N) -> ");
-                            secondChoice = scan.next().charAt(0);
                         }
 
                     } while (secondChoice == 'Y' || secondChoice == 'y');
