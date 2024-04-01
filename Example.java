@@ -3,14 +3,19 @@ import java.util.*;
 class Example {
     public static void main(String args[]) {
         Scanner input = new Scanner(System.in);
-        // Random input = new Random();
 
-        int n = 10;
+        System.out.print("Input an integer : ");
+        int num = input.nextInt();
+
+        // Find no of digits
+        int count = 0;
 
         do {
-            System.out.println(n);
-            n--;
+            num = num / 10; // num/=10;
+            count++;
+        } while (num != 0);
 
-        } while (n > 0);
+        System.out.println("No of digits : " + count);
+
     }
 }
