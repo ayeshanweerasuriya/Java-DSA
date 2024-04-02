@@ -66,3 +66,12 @@
         } else {               
             System.out.println("Wrong Answer!");
         }
+
+
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("|                Decimal Number to Roman Number Converter                |");
+            System.out.println("+------------------------------------------------------------------------+");
+
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("|                Roman Number to Decimal Number Converter                |");
+            System.out.println("+------------------------------------------------------------------------+");
