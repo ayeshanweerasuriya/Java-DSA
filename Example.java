@@ -1,27 +1,31 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Example {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
 
-        System.out.println("Enter a string:");
-        String input = scan.nextLine();
+        String[] words = {};
 
-        boolean isPalindrome = true;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("D:\\ICET\\ICET.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                words = line.split(" ");
 
-        for (int i = 0; i < input.length() / 2; i++) {
-            if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
+                for (String word : words) {
+
+                    if (word.equalsIgnoreCase("vs")) {
+                        continue;
+                    } else {
+                        System.out.println(word);
+                    }
+                }
             }
-        }
+            reader.close();
 
-        if (isPalindrome) {
-            System.out.println("\n" + input + " is a palindrome.");
-        } else {
-            System.out.println("\n" + input + " is not a palindrome.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        scan.close();
     }
 }
