@@ -116,7 +116,6 @@ public class TaxCalculator {
 
             if (scan.hasNextInt()) {
                 rentAmount = scan.nextInt();
-                while (rentAmount > 100000) {
                     if (rentAmount > 100000) {
                         double rentTaxAmount = (rentAmount / 0.1) + rentAmount;
                         System.out.print("\tYou have to pay Rent Tax : " + rentTaxAmount);
@@ -140,7 +139,6 @@ public class TaxCalculator {
                                 main(null);
                             }
                     }
-                }
 
             } else {
                 System.out.println("\n\tInvalid input...");
