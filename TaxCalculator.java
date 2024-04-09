@@ -68,7 +68,7 @@ public class TaxCalculator {
         do {
             System.out.print("\033\143");
             System.out.println("+---------------------------------------------------------------------------+");
-            System.out.println("|                               Withholding Tax                             |");
+            System.out.println("|                                 PAYABLE TAX                               |");
             System.out.println("+---------------------------------------------------------------------------+");
 
             System.out.println("\nEnter your Employee Payment per month : ");
@@ -93,7 +93,7 @@ public class TaxCalculator {
                 if (empPayment <= 100000) {
                     System.out.println("\n\tYou don't have to pay Payable Tax...");
                 } else {
-                    
+
                 }
 
             System.out.print("\n\n\nDo you want to calculate another Dividend Tax (Y/N) : ");
@@ -162,7 +162,7 @@ public class TaxCalculator {
        do {
         System.out.print("\033\143");
         System.out.println("+---------------------------------------------------------------+");
-        System.out.println("|                          Dividend TAX                         |");
+        System.out.println("|                          DIVIDENT TAX                         |");
         System.out.println("+---------------------------------------------------------------+\n");
         System.out.print("Enter your total dividend per year    : ");
         int divided = scan.nextInt();
