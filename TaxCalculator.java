@@ -39,12 +39,15 @@ public class TaxCalculator {
                         withholdingTax(scan);
                         break;
                     case 2:
+                        System.out.print("\033\143");
                         payableTax(scan);
                         break;
                     case 3:
+                        System.out.print("\033\143");
                         incomeTax(scan);
                         break;
                     case 4:
+                        System.out.print("\033\143");
                         ssclTax(scan);
                         break;
                     case 5:
@@ -91,9 +94,11 @@ public class TaxCalculator {
                         rentTax(scan);
                         break;
                     case 2:
+                        System.out.print("\033\143");
                         bankInterestTax(scan);
                         break;
                     case 3:
+                        System.out.print("\033\143");
                         dividendTax(scan);
                         break;
                     case 4:
@@ -164,6 +169,7 @@ public class TaxCalculator {
             }
         }
 
+        // Find Leasing Amount Method
     private static void findLeasingAmount(Scanner scan) {
         boolean secondSubContinueLoop = true;
         do {
@@ -238,6 +244,7 @@ public class TaxCalculator {
 
         }
 
+        // Search Leasing Ctegory Method
     private static void searchLeasingCategory(Scanner scan) {
         boolean secondSubContinueLoop = true;
         do {
@@ -299,6 +306,7 @@ public class TaxCalculator {
         } while (secondSubContinueLoop);
         }
 
+        // Calculate Monthly Intallment Method
     private static void calculateMonthlyInstallment(Scanner scan) {
         boolean secondSubContinueLoop = true;
         do {
@@ -405,7 +413,7 @@ public class TaxCalculator {
                 double vat = valueAfterSaleTax * 0.15; 
                 double totalSSCLTax = saleTax + vat;
 
-                System.out.print("\nYou have to pay SSCL Tax       : " + totalSSCLTax);
+                System.out.printf("\nYou have to pay SSCL Tax       : %.2f", (double) Math.round(totalSSCLTax));
 
                 System.out.print("\n\n\nDo you want to calculate another SSCL Tax (Y/N) : ");
                 char isCont = scan.next().toUpperCase().charAt(0);
@@ -680,10 +688,10 @@ public class TaxCalculator {
                 }
 
             } else if ((rentAmount = scan.nextInt()) <= 0) {
-                System.out.println("\tInvalid input...");
+                System.out.println("\n\tInvalid input...");
                 scan.nextLine();
 
-                System.out.print("\n\nDo you want to enter the correct value again (Y/N) : ");
+                System.out.print("\n\n\nDo you want to enter the correct value again (Y/N) : ");
                 char isCont = scan.next().toUpperCase().charAt(0);
                 scan.nextLine();
 
@@ -701,7 +709,7 @@ public class TaxCalculator {
                     System.out.println("\n\tYou don't have to pay rent tax...");
                 }
 
-                System.out.print("\n\nDo you want to calculate another Rent Tax (Y/N) : ");
+                System.out.print("\n\n\nDo you want to calculate another Rent Tax (Y/N) : ");
                 char isCont = scan.next().toUpperCase().charAt(0);
                 scan.nextLine();
 
