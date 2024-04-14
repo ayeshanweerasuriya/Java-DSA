@@ -1,75 +1,23 @@
-import java.util.Scanner;
-
-class Calculator {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-
-        System.out.print("Enter the first number: ");
-        int firstNumber = scan.nextInt();
-
-        System.out.print("Enter the second number: ");
-        int secondNumber = scan.nextInt();
-
-        boolean isRunning = true;
-        while (isRunning) {
-            System.out.print("Enter the operator  (+,-,*,/,%,^): ");
-            char operator = scan.next().charAt(0);
-
-            switch (operator) {
-                case '+':
-                    addition(firstNumber, secondNumber);
-                    isRunning = false;
-                    break;
-                case '-':
-                    subtraction(firstNumber, secondNumber);
-                    isRunning = false;
-                    break;
-                case '*':
-                    multiplication(firstNumber, secondNumber);
-                    isRunning = false;
-                    break;
-                case '/':
-                    dividend(firstNumber, secondNumber);
-                    isRunning = false;
-                    break;
-                case '%':
-                    remainder(firstNumber, secondNumber);
-                    isRunning = false;
-                    break;
-                case '^':
-                    power(firstNumber, secondNumber);
-                    isRunning = false;
-                    break;
-                default:
-                    System.out.println("Invalid operand. Please try again\n");
-                    break;
-            }
-        }
-        scan.close();
+class Demo {
+    public static void test() {
+        System.out.println("Hello....");
     }
 
-    public static void addition(int firstNumber, int secondNumber) {
-        System.out.println("\nResult: " + firstNumber + " + " + secondNumber + " = " + (firstNumber + secondNumber));
+    public static void test(String name) {
+        System.out.println("Hello " + name + "....");
     }
 
-    public static void subtraction(int firstNumber, int secondNumber) {
-        System.out.println("\nResult: " + firstNumber + " - " + secondNumber + " = " + (firstNumber - secondNumber));
-    }
-
-    public static void multiplication(int firstNumber, int secondNumber) {
-        System.out.println("\nResult: " + firstNumber + " * " + secondNumber + " = " + (firstNumber * secondNumber));
-    }
-
-    public static void dividend(int firstNumber, int secondNumber) {
-        System.out.println("\nResult: " + firstNumber + " / " + secondNumber + " = " + (firstNumber / secondNumber));
-    }
-
-    public static void remainder(int firstNumber, int secondNumber) {
-        System.out.println("\nResult: " + firstNumber + " % " + secondNumber + " = " + (firstNumber % secondNumber));
-    }
-
-    public static void power(int firstNumber, int secondNumber) {
-        System.out.println(
-                "\nResult: " + firstNumber + " ^ " + secondNumber + " = " + Math.pow(firstNumber, secondNumber));
+    public static void main(String args[]) {
+        String s = "java"; // Line 1
+        // test; //Line 2
+        test(); // Line 3
+        // test(){ } //Line 4
+        // test(){ }; //Line 5
+        Demo.test(); // Line 6
+        System.out.println("test()"); // Line 7
+        // System.out.println(test()); //Line 8
+        test(s); // Line 9
+        // System.out.println(test(s)); //Line 10
+        System.out.println("test(s)"); // Line 11
     }
 }
