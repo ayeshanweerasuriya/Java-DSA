@@ -35,6 +35,7 @@ public class Me {
     }
 
     public static void main(String[] args) {
+        // Starting Point for the Program
         checkPassword();
     }
 }
