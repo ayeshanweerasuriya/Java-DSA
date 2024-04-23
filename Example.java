@@ -1,31 +1,22 @@
 import java.util.*;
 
 class Example {
+
     public static void main(String args[]) {
-        Scanner input = new Scanner(System.in);
-        int[] ar = new int[10];
+        int[] arr = new int[0];
+        arr[0] = 12;
+        arr[1] = 35;
+        arr[2] = 47;
+        arr[3] = 59;
+        arr[4] = 62;
+        arr[5] = 73;
+        arr[6] = 81;
+        arr[7] = 93;
+        arr[8] = 111;
+        arr[9] = 121;
 
-        // ---------------------Input------------------------
-        for (int i = 0; i < 10; i++) {
-            System.out.print("Input number " + (i + 1) + " : ");
-            ar[i] = input.nextInt();
-        }
-
-        // ----------------------find total----------------------
-        int total = 0;
-        for (int i = 0; i < 10; i++) {
-            total += ar[i];
-        }
-
-        // ----------------------find maximum-------------------
-        int min = ar[0];
-        for (int i = 0; i < 10; i++) {
-            if (min > ar[i]) {
-                min = ar[i];
-            }
-        }
-
-        System.out.println("Total   : " + total);
-        System.out.println("Maximum : " + min);
+        System.out.println(arr[0]);
+        System.out.println(arr[3]);
+        System.out.println(arr[5]);
     }
 }
