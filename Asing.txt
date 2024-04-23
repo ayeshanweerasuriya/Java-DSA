@@ -1,0 +1,60 @@
+// 01
+// class Example {
+
+// public static void main(String args[]) {
+// int[] arr = new int[10];
+// arr[0] = 12;
+// arr[1] = 35;
+// arr[2] = 47;
+// arr[3] = 59;
+// arr[4] = 62;
+// arr[5] = 73;
+// arr[6] = 81;
+// arr[7] = 93;
+// arr[8] = 111;
+// arr[9] = 121;
+
+// System.out.println("arr[0]: " + arr[0]);
+// System.out.println("arr[3]: " + arr[3]);
+// System.out.println("arr[5]: " + arr[5]);
+// }
+// }
+
+// 02
+// class Example {
+// public static void main(String[] args) {
+// double[] averageMarks = { 85.66, 78, 67.33, 57.66, 81, 91, 53.66, 61.66,
+// 74.33, 79.33 };
+
+// System.out.println("Average marks of the 3rd student: " + averageMarks[3]);
+// System.out.println("Average marks of the 7th student: " + averageMarks[7]);
+// }
+// }
+
+// 03
+// class Example {
+// public static void main(String[] args) {
+// int[] foreignExchangeReserves = { 2362, 2311, 1917, 1912, 1887, 1854, 1717,
+// 1717, 1779, 1705, 1806, 1896 };
+
+// System.out.println("January : " + foreignExchangeReserves[0]);
+// System.out.println("February : " + foreignExchangeReserves[1]);
+// System.out.println("March : " + foreignExchangeReserves[2]);
+// System.out.println("April : " + foreignExchangeReserves[3]);
+// System.out.println("May : " + foreignExchangeReserves[4]);
+// System.out.println("June : " + foreignExchangeReserves[5]);
+// System.out.println("July : " + foreignExchangeReserves[6]);
+// System.out.println("August : " + foreignExchangeReserves[7]);
+// System.out.println("September : " + foreignExchangeReserves[8]);
+// System.out.println("October : " + foreignExchangeReserves[9]);
+// System.out.println("November : " + foreignExchangeReserves[10]);
+// System.out.println("December : " + foreignExchangeReserves[11]);
+
+// foreignExchangeReserves[3] = 1812;
+// foreignExchangeReserves[6] = 1817;
+
+// System.out.println("\n");
+// System.out.println("April : " + foreignExchangeReserves[3]);
+// System.out.println("July : " + foreignExchangeReserves[6]);
+// }
+// }
