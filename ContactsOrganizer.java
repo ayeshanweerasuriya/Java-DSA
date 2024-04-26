@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 class ContactsOrganizer {
@@ -7,6 +9,7 @@ class ContactsOrganizer {
         boolean mainProgramContinue = true;
 
         do {
+            System.out.print("\033\143");
             Scanner scan = new Scanner(System.in);
             System.out.println("\t /$$ /$$$$$$$$ /$$$$$$$  /$$$$$$ /$$$$$$$$ /$$   /$$ /$$$$$$");
             System.out.println("\t|__/| $$_____/| $$__  $$|_  $$_/| $$_____/| $$$ | $$| $$__  $$");
@@ -63,6 +66,7 @@ class ContactsOrganizer {
         } while (mainProgramContinue);
     }
 
+    // Unique contact_id generator method
     public static String generateContactId() {
         String contactId = String.format("C%04d", counter);
         counter++;
@@ -71,18 +75,26 @@ class ContactsOrganizer {
 
     private static void addContact(Scanner scan) {
         boolean subProgramContinue = true;
-        boolean phoneNumberCorrect = true;
-        do {
-            System.out.println(generateContactId() + "\n=======\n");
+        boolean validateLoop = true;
+        boolean secondValidateLoop = true;
+        boolean thirdValidateLoop = true;
 
-            System.out.print("Name: ");
+        do {
+            System.out.print("\033\143");
+            System.out.println("+--------------------------------------------------------------+");
+            System.out.println("|                    ADD Contact to the list                   |");
+            System.out.println("+--------------------------------------------------------------+");
+            System.out.println("\n\n" + generateContactId() + "\n=======\n");
+
+            System.out.print("Name              : ");
             String name = scan.nextLine();
             scan.nextLine();
 
+            // Phone number validate code
             do {
-                System.out.print("Phone Number: ");
+                System.out.print("Phone Number      : ");
                 String input = scan.nextLine();
-                if (input.length() > 10 || input.length() < 10) {
+                if (input.charAt(0) != '0' || input.length() > 10 || input.length() < 10) {
                     System.out.println("\n\tInvalid phone number...");
 
                     System.out.print("\nDo you want to enter phone number again (Y/N): ");
@@ -90,18 +102,115 @@ class ContactsOrganizer {
                     scan.nextLine();
 
                     if (option == 'Y') {
-                        phoneNumberCorrect = true;
+                        validateLoop = true;
 
+                        // Found this code to clear lines in StackOverFlow
+                        for (int i = 0; i < 5; i++) {
+                            System.out.print("\033[1A"); // Move cursor up one line
+                            System.out.print("\033[2K"); // Clear current line
+                        }
                     } else if (option == 'N') {
-                        phoneNumberCorrect = false;
+                        validateLoop = false;
                         subProgramContinue = false;
                         main(null);
                     }
                 } else {
-                    phoneNumberCorrect = false;
+                    validateLoop = false;
                 }
-            } while (phoneNumberCorrect);
+            } while (validateLoop);
+
+            System.out.print("Company name      : ");
+            String companyName = scan.nextLine();
+
+            do {
+                System.out.print("Salary            : ");
+                double salary = scan.nextDouble();
+
+                if (salary < 0) {
+                    System.out.println("\n\tInvalid salary...");
+
+                    System.out.print("\nDo you want to enter salary again (Y/N): ");
+                    char option = scan.next().toUpperCase().charAt(0);
+                    scan.nextLine();
+
+                    if (option == 'Y') {
+                        secondValidateLoop = true;
+
+                        // Found this code to clear lines in StackOverFlow
+                        for (int i = 0; i < 5; i++) {
+                            System.out.print("\033[1A"); // Move cursor up one line
+                            System.out.print("\033[2K"); // Clear current line
+                        }
+                    } else if (option == 'N') {
+                        secondValidateLoop = false;
+                        subProgramContinue = false;
+                        main(null);
+                    }
+                } else {
+                    secondValidateLoop = false;
+                }
+
+            } while (secondValidateLoop);
+
+            Scanner newScanner = new Scanner(System.in);
+            do {
+                System.out.print("B'Day (YYYY-MM-DD): ");
+                String birthdayString = newScanner.nextLine();
+
+                if (!dataValidator(birthdayString)) {
+                    System.out.println("\n\tInvalid birthday...");
+
+                    System.out.print("\nDo you want to enter birthday again (Y/N): ");
+                    char option = scan.next().toUpperCase().charAt(0);
+                    scan.nextLine();
+
+                    if (option == 'Y') {
+                        thirdValidateLoop = true;
+
+                        // Found this code to clear lines in StackOverFlow
+                        for (int i = 0; i < 5; i++) {
+                            System.out.print("\033[1A"); // Move cursor up one line
+                            System.out.print("\033[2K"); // Clear current line
+                        }
+                    } else if (option == 'N') {
+                        thirdValidateLoop = false;
+                        subProgramContinue = false;
+                        main(null);
+                    }
+
+                } else {
+                    thirdValidateLoop = false;
+                }
+            } while (thirdValidateLoop);
+
+            System.out.println("\n\tContact has been added successfully...");
+
+            System.out.print("\n\nDo you want to add another contact (Y/N): ");
+            char option = scan.next().toUpperCase().charAt(0);
+
+            if (option == 'Y') {
+                subProgramContinue = true;
+                System.out.print("\033\143");
+            } else if (option == 'N') {
+                subProgramContinue = false;
+                main(null);
+            }
 
         } while (subProgramContinue);
+    }
+
+    // Birth date validation method
+    private static boolean dataValidator(String birthdayString) {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        try {
+            LocalDate birthday = LocalDate.parse(birthdayString, dateFormatter);
+
+            LocalDate currentDate = LocalDate.now();
+
+            return !birthday.isAfter(currentDate);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
