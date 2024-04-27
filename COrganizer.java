@@ -236,6 +236,19 @@ public class COrganizer {
 
             if (indexOfContact == -1) {
                 System.out.println("Contact not found.");
+
+                System.out.println("No Contact found as " + search);
+
+                System.out.print("Do you want to try new Search (Y/n): ");
+                char option = scan.next().toUpperCase().charAt(0);
+
+                if (option == 'Y') {
+                    continue;
+                } else {
+                    subProgramContinue = false;
+                    homepage();
+                }
+
             } else {
                 System.out.println("\n\n\tContact ID : " + contactIdArray[indexOfContact]);
                 System.out.println("\tName : " + contactNameArray[indexOfContact]);
