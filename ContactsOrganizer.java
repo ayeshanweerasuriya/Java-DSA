@@ -99,9 +99,9 @@ public class ContactsOrganizer {
             System.out.println("|                          Sort Contact                        |");
             System.out.println("+--------------------------------------------------------------+\n\n");
 
-            System.out.println("\n\t[01] Sorting by name");
-            System.out.println("\t[02] Sorting by salary");
-            System.out.println("\t[03] Sorting by birthday\n");
+            System.out.println("\t[01] Sorting by name\n");
+            System.out.println("\t[02] Sorting by salary\n");
+            System.out.println("\t[03] Sorting by birthday\n\n");
 
             System.out.print("Enter an option to continue -> ");
             int option = scan.nextInt();
@@ -126,20 +126,29 @@ public class ContactsOrganizer {
 
     private static void listContactByBirthday() {
         Scanner scan = new Scanner(System.in);
-        sortingArrayByBirthday();
-        System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
-        System.out.println("|   Contact ID  |        Name        |    Phone Number    |       Company      |       Salary       |      Birthday      |");
-        System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
-        for (int i = 0; i < contactNameArray.length; i++) {
-            System.out.printf("|   %-12s|  %-18s|  %-18s|  %-18s|  %-18s|  %-18s|\n", contactIdArray[i], contactNameArray[i], phoneNumberArray[i], companyNameArray[i], salaryArray[i], birthDayArray[i]);
+
+        if (contactNameArray.length > 0) {
+            clearLines(8);
+            sortingArrayByBirthday();
+            System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
+            System.out.println("|   Contact ID  |        Name        |    Phone Number    |       Company      |       Salary       |      Birthday      |");
+            System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
+            for (int i = 0; i < contactNameArray.length; i++) {
+                System.out.printf("|   %-12s|  %-18s|  %-18s|  %-18s|  %-18s|  %-18s|\n", contactIdArray[i], contactNameArray[i], phoneNumberArray[i], companyNameArray[i], salaryArray[i], birthDayArray[i]);
+            }
+            System.out.println("+------------------------------------------------------------------------------------------------------------------------+");        
+        } else {
+            System.out.println("\nThere is no data to show...");
         }
-        System.out.println("+------------------------------------------------------------------------------------------------------------------------+");        
 
         goToHomePage(scan);
     }
 
     private static void listContactBySalary() {
         Scanner scan = new Scanner(System.in);
+
+        if (contactNameArray.length > 0) {
+            clearLines(8);
         sortingArrayBySalary();
         System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
         System.out.println("|   Contact ID  |        Name        |    Phone Number    |       Company      |       Salary       |      Birthday      |");
@@ -148,6 +157,9 @@ public class ContactsOrganizer {
             System.out.printf("|   %-12s|  %-18s|  %-18s|  %-18s|  %-18s|  %-18s|\n", contactIdArray[i], contactNameArray[i], phoneNumberArray[i], companyNameArray[i], salaryArray[i], birthDayArray[i]);
         }
         System.out.println("+------------------------------------------------------------------------------------------------------------------------+");        
+        } else {
+            System.out.println("\nThere is no data to show...");
+        }
 
         goToHomePage(scan);
     }
@@ -234,6 +246,8 @@ public class ContactsOrganizer {
 
     private static void listContactByName() {
         Scanner scan = new Scanner(System.in);
+        if (contactNameArray.length > 0) {
+            clearLines(8);
         sortingArrayByName();
         System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
         System.out.println("|   Contact ID  |        Name        |    Phone Number    |       Company      |       Salary       |      Birthday      |");
@@ -242,12 +256,15 @@ public class ContactsOrganizer {
             System.out.printf("|   %-12s|  %-18s|  %-18s|  %-18s|  %-18s|  %-18s|\n", contactIdArray[i], contactNameArray[i], phoneNumberArray[i], companyNameArray[i], salaryArray[i], birthDayArray[i]);
         }
         System.out.println("+------------------------------------------------------------------------------------------------------------------------+");        
+        } else {
+            System.out.println("\nThere is no data to show...");
+        }
 
         goToHomePage(scan);
     }
 
     private static void goToHomePage(Scanner scan) {
-        System.out.print("\n\nDo you want to Home Page (Y/N)");
+        System.out.print("\n\nDo you want to go Home Page (Y/N): ");
         char option = scan.next().toUpperCase().charAt(0);
 
         if (option == 'Y') {
