@@ -1,26 +1,29 @@
-import java.util.*;
+import java.util.Arrays;
 
-class Example {
-    public static void main(String args[]) {
-        int[][] marks = new int[10][4];// 10-->No of students,4-->No of subjects
+public class Example {
+    public static void main(String[] args) {
+        String[] subjects = { "Mathematics", "Science", "English", "Sinhala", "History", "Buddhism", "Business Studies",
+                "Computer Studies" };
 
-        Scanner input = new Scanner(System.in);
-        Random random = new Random();
+        subjects = addSubject(subjects, "Music");
 
-        for (int i = 0; i < 10; i++) {
-            // System.out.println("Input marks for students " + (i + 1) + "....");
-            for (int j = 0; j < 4; j++) {
-                // System.out.print("\tSubject " + (j + 1) + " : ");
-                int randomNumber = random.nextInt(100);
-                marks[i][j] = randomNumber;
-            }
+        System.out.println("Updated Subject List: " + Arrays.toString(subjects));
+    }
+
+    public static String[] addSubject(String[] subjects, String newSubject) {
+        String[] updatedSubjects = new String[subjects.length + 1];
+        int index = 7;
+
+        for (int i = 0; i < index; i++) {
+            updatedSubjects[i] = subjects[i];
         }
 
-        for (int i = 0; i < marks.length - 1; i++) {
-            for (int j = 0; j < marks[i].length; j++) {
-                System.out.print(marks[i][j] + " ");
-            }
-            System.out.println();
+        updatedSubjects[index] = newSubject;
+
+        for (int i = index + 1; i < updatedSubjects.length; i++) {
+            updatedSubjects[i] = subjects[i - 1];
         }
+
+        return updatedSubjects;
     }
 }
