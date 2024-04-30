@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ContactsOrganizer {
-    private static int counter = 1;
+    private static int counter = 0;
     public static String[] contactIdArray = new String[0];
     public static String[] contactNameArray = new String[0];
     public static String[] phoneNumberArray = new String[0];
@@ -130,13 +130,19 @@ public class ContactsOrganizer {
         if (contactNameArray.length > 0) {
             clearLines(8);
             sortingArrayByBirthday();
-            System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
-            System.out.println("|   Contact ID  |        Name        |    Phone Number    |       Company      |       Salary       |      Birthday      |");
-            System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
+            System.out.println(
+                    "+------------------------------------------------------------------------------------------------------------------------+");
+            System.out.println(
+                    "|   Contact ID  |        Name        |    Phone Number    |       Company      |       Salary       |      Birthday      |");
+            System.out.println(
+                    "+------------------------------------------------------------------------------------------------------------------------+");
             for (int i = 0; i < contactNameArray.length; i++) {
-                System.out.printf("|   %-12s|  %-18s|  %-18s|  %-18s|  %-18s|  %-18s|\n", contactIdArray[i], contactNameArray[i], phoneNumberArray[i], companyNameArray[i], salaryArray[i], birthDayArray[i]);
+                System.out.printf("|   %-12s|  %-18s|  %-18s|  %-18s|  %-18s|  %-18s|\n", contactIdArray[i],
+                        contactNameArray[i], phoneNumberArray[i], companyNameArray[i], salaryArray[i],
+                        birthDayArray[i]);
             }
-            System.out.println("+------------------------------------------------------------------------------------------------------------------------+");        
+            System.out.println(
+                    "+------------------------------------------------------------------------------------------------------------------------+");
         } else {
             System.out.println("\nThere is no data to show...");
         }
@@ -149,14 +155,20 @@ public class ContactsOrganizer {
 
         if (contactNameArray.length > 0) {
             clearLines(8);
-        sortingArrayBySalary();
-        System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
-        System.out.println("|   Contact ID  |        Name        |    Phone Number    |       Company      |       Salary       |      Birthday      |");
-        System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
-        for (int i = 0; i < contactNameArray.length; i++) {
-            System.out.printf("|   %-12s|  %-18s|  %-18s|  %-18s|  %-18s|  %-18s|\n", contactIdArray[i], contactNameArray[i], phoneNumberArray[i], companyNameArray[i], salaryArray[i], birthDayArray[i]);
-        }
-        System.out.println("+------------------------------------------------------------------------------------------------------------------------+");        
+            sortingArrayBySalary();
+            System.out.println(
+                    "+------------------------------------------------------------------------------------------------------------------------+");
+            System.out.println(
+                    "|   Contact ID  |        Name        |    Phone Number    |       Company      |       Salary       |      Birthday      |");
+            System.out.println(
+                    "+------------------------------------------------------------------------------------------------------------------------+");
+            for (int i = 0; i < contactNameArray.length; i++) {
+                System.out.printf("|   %-12s|  %-18s|  %-18s|  %-18s|  %-18s|  %-18s|\n", contactIdArray[i],
+                        contactNameArray[i], phoneNumberArray[i], companyNameArray[i], salaryArray[i],
+                        birthDayArray[i]);
+            }
+            System.out.println(
+                    "+------------------------------------------------------------------------------------------------------------------------+");
         } else {
             System.out.println("\nThere is no data to show...");
         }
@@ -201,9 +213,10 @@ public class ContactsOrganizer {
                 int year2 = Integer.parseInt(date2[0]);
                 int month2 = Integer.parseInt(date2[1]);
                 int day2 = Integer.parseInt(date2[2]);
-    
+
                 // Compare years first
-                if (year2 < year1 || (year2 == year1 && month2 < month1) || (year2 == year1 && month2 == month1 && day2 < day1)) {
+                if (year2 < year1 || (year2 == year1 && month2 < month1)
+                        || (year2 == year1 && month2 == month1 && day2 < day1)) {
                     minIndex = j;
                 }
             }
@@ -212,7 +225,6 @@ public class ContactsOrganizer {
             }
         }
     }
-    
 
     // sort by name
     private static void sortingArrayByName() {
@@ -229,7 +241,7 @@ public class ContactsOrganizer {
         }
     }
 
-        // sort by salary
+    // sort by salary
     private static void sortingArrayBySalary() {
         for (int i = 0; i < salaryArray.length - 1; i++) {
             int minIndex = i;
@@ -248,14 +260,20 @@ public class ContactsOrganizer {
         Scanner scan = new Scanner(System.in);
         if (contactNameArray.length > 0) {
             clearLines(8);
-        sortingArrayByName();
-        System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
-        System.out.println("|   Contact ID  |        Name        |    Phone Number    |       Company      |       Salary       |      Birthday      |");
-        System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
-        for (int i = 0; i < contactNameArray.length; i++) {
-            System.out.printf("|   %-12s|  %-18s|  %-18s|  %-18s|  %-18s|  %-18s|\n", contactIdArray[i], contactNameArray[i], phoneNumberArray[i], companyNameArray[i], salaryArray[i], birthDayArray[i]);
-        }
-        System.out.println("+------------------------------------------------------------------------------------------------------------------------+");        
+            sortingArrayByName();
+            System.out.println(
+                    "+------------------------------------------------------------------------------------------------------------------------+");
+            System.out.println(
+                    "|   Contact ID  |        Name        |    Phone Number    |       Company      |       Salary       |      Birthday      |");
+            System.out.println(
+                    "+------------------------------------------------------------------------------------------------------------------------+");
+            for (int i = 0; i < contactNameArray.length; i++) {
+                System.out.printf("|   %-12s|  %-18s|  %-18s|  %-18s|  %-18s|  %-18s|\n", contactIdArray[i],
+                        contactNameArray[i], phoneNumberArray[i], companyNameArray[i], salaryArray[i],
+                        birthDayArray[i]);
+            }
+            System.out.println(
+                    "+------------------------------------------------------------------------------------------------------------------------+");
         } else {
             System.out.println("\nThere is no data to show...");
         }
@@ -725,9 +743,27 @@ public class ContactsOrganizer {
 
     // generate contact id
     public static String generateContactId() {
-        String contactId = String.format("C%04d", counter);
+        String initialString = "C000";
         counter++;
-        return contactId;
+        String convertCounterToString = String.valueOf(counter);
+
+        String idCon = initialString + convertCounterToString;
+
+        if (idCon.length() == 6) {
+            String initialString1 = "C00";
+            return initialString1 + convertCounterToString;
+
+        } else if (idCon.length() == 7) {
+            String initialString2 = "C0";
+            return initialString2 + convertCounterToString;
+
+        } else if (idCon.length() == 8) {
+            String initialString3 = "C";
+            return initialString3 + convertCounterToString;
+
+        } else {
+            return idCon;
+        }
     }
 
     // validate birthday
