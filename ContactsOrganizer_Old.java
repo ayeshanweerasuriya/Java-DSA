@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-class ContactsOrganizer {
+class ContactsOrganizer_Old {
     private static int counter = 1;
     public static String[] contactIdArray = new String[0];
     public static String[] contactNameArray = new String[0];

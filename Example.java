@@ -1,29 +1,34 @@
-import java.util.Arrays;
-
 public class Example {
+    static int counter = 0;
     public static void main(String[] args) {
-        String[] subjects = { "Mathematics", "Science", "English", "Sinhala", "History", "Buddhism", "Business Studies",
-                "Computer Studies" };
 
-        subjects = addSubject(subjects, "Music");
-
-        System.out.println("Updated Subject List: " + Arrays.toString(subjects));
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(increment());
+        }
+           
     }
 
-    public static String[] addSubject(String[] subjects, String newSubject) {
-        String[] updatedSubjects = new String[subjects.length + 1];
-        int index = 7;
+    public static String increment() {
+        String initialString = "C000";
+        counter++;
+        String convertCounterToString = String.valueOf(counter);
 
-        for (int i = 0; i < index; i++) {
-            updatedSubjects[i] = subjects[i];
-        }
+        String idCon = initialString + convertCounterToString;
 
-        updatedSubjects[index] = newSubject;
+         if (idCon.length() == 6) {
+            String initialString1 = "C00";
+            return  initialString1 + convertCounterToString;
 
-        for (int i = index + 1; i < updatedSubjects.length; i++) {
-            updatedSubjects[i] = subjects[i - 1];
-        }
+         } else if (idCon.length() == 7) {
+            String initialString2 = "C0";
+            return  initialString2 + convertCounterToString;
 
-        return updatedSubjects;
+         } else if (idCon.length() == 8) {
+            String initialString3 = "C";
+            return  initialString3 + convertCounterToString;
+
+         } else {
+            return idCon;
+         }
     }
 }
