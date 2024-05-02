@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Example {
+public class CovidNinteenProgram {
    public static void main(String[] args) {
       Random random = new Random();
       int[][] patientData = new int[12][];
