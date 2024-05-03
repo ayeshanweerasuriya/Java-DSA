@@ -1,3 +1,5 @@
+// Please run the program to see all the answers
+
 import java.util.Random;
 
 public class CovidNinteenProgram {
@@ -16,14 +18,15 @@ public class CovidNinteenProgram {
          }
       }
 
-      for (int month = 0; month < 12; month++) {
-         String monthName = getMonthName(month + 1);
-         System.out.println("Patient data for " + monthName + ":");
-         for (int day = 0; day < patientData[month].length; day++) {
-            System.out.println("Day " + (day + 1) + ": " + patientData[month][day] + " patients");
-         }
-         System.out.println();
-      }
+      // for (int month = 0; month < 12; month++) {
+      // String monthName = getMonthName(month + 1);
+      // System.out.println("Patient data for " + monthName + ":");
+      // for (int day = 0; day < patientData[month].length; day++) {
+      // System.out.println("Day " + (day + 1) + ": " + patientData[month][day] + "
+      // patients");
+      // }
+      // System.out.println();
+      // }
 
       // I. Print the number of patients recorded on the following dates
       System.out.println("\nFor I Question ======================================\n");
@@ -166,6 +169,29 @@ public class CovidNinteenProgram {
       // name of the month
       System.out.println("\nFor XXIV Question ====================================\n");
       printMinimumPatientsPerMonth(patientData);
+
+      // XXV. The number of patients reported in November in descending order
+      System.out.println("\nFor XXV Question ====================================\n");
+      printPatientsInNovemberDescending(patientData);
+
+      // XXVI. Print the number of patients reported in August in ascending order with
+      // date
+      System.out.println("\nFor XXVI Question ====================================\n");
+      printPatientsInAugustAscending(patientData);
+
+      // XXVII. Print the total number of patients reported in each month in
+      // descending order with the name of month
+      System.out.println("\nFor XXVII Question ====================================\n");
+      printTotalPatientsPerMonthDescending(patientData);
+
+      // XXVIII. Print the table showing patient count reports for each day of the
+      // month
+      System.out.println("\nFor XXVIII Question ====================================\n");
+      printPatientCountTable(patientData);
+
+      // XXIX. Add the Total and average of each month to the above report.
+      System.out.println("\nFor XXIX Question ====================================\n");
+      printPatientFinalCountTable(patientData);
 
    }
 
@@ -463,4 +489,186 @@ public class CovidNinteenProgram {
 
       }
    }
+
+   // method to Print the number of patients reported in November in descending
+   // order
+   public static void printPatientsInNovemberDescending(int[][] patientData) {
+      int[] novemberCounts = patientData[10];
+
+      Integer[] days = new Integer[novemberCounts.length];
+      for (int i = 0; i < novemberCounts.length; i++) {
+         days[i] = i + 1;
+      }
+
+      for (int i = 0; i < novemberCounts.length - 1; i++) {
+         for (int j = 0; j < novemberCounts.length - i - 1; j++) {
+            if (novemberCounts[j] < novemberCounts[j + 1]) {
+
+               int tempCount = novemberCounts[j];
+               novemberCounts[j] = novemberCounts[j + 1];
+               novemberCounts[j + 1] = tempCount;
+
+               int tempDay = days[j];
+               days[j] = days[j + 1];
+               days[j + 1] = tempDay;
+            }
+         }
+      }
+
+      for (int i = 0; i < novemberCounts.length; i++) {
+         if (novemberCounts[i] > 0) {
+            System.out.println("\t2021-11-" + days[i] + "\t: " + novemberCounts[i] + " patients");
+         }
+      }
+   }
+
+   // method to Print the number of patients reported in August in ascending order
+   // with date
+   public static void printPatientsInAugustAscending(int[][] patientData) {
+      int[] augustCounts = patientData[7];
+
+      Integer[] days = new Integer[augustCounts.length];
+      for (int i = 0; i < augustCounts.length; i++) {
+         days[i] = i + 1;
+      }
+
+      for (int i = 0; i < augustCounts.length - 1; i++) {
+         for (int j = 0; j < augustCounts.length - i - 1; j++) {
+            if (augustCounts[j] > augustCounts[j + 1]) {
+
+               int tempCount = augustCounts[j];
+               augustCounts[j] = augustCounts[j + 1];
+               augustCounts[j + 1] = tempCount;
+
+               int tempDay = days[j];
+               days[j] = days[j + 1];
+               days[j + 1] = tempDay;
+            }
+         }
+      }
+
+      for (int i = 0; i < augustCounts.length; i++) {
+         if (augustCounts[i] > 0) {
+            System.out.println("\t2021-08-" + days[i] + "\t: " + augustCounts[i] + " patients");
+         }
+      }
+   }
+
+   // methods to print t the total number of patients reported in each month in
+   // descending order with the name of month
+   public static void printTotalPatientsPerMonthDescending(int[][] patientData) {
+
+      int[] totalPatientsPerMonth = new int[12];
+      for (int month = 0; month < 12; month++) {
+         for (int day = 0; day < patientData[month].length; day++) {
+            totalPatientsPerMonth[month] += patientData[month][day];
+         }
+      }
+
+      sortTotalPatientsDescending(totalPatientsPerMonth);
+
+      for (int i = 0; i < totalPatientsPerMonth.length; i++) {
+         String monthName = getMonthName(i + 1);
+         System.out.printf("\t%-10s\t: %d patients%n", monthName, totalPatientsPerMonth[i]);
+
+      }
+   }
+
+   public static void sortTotalPatientsDescending(int[] totalPatients) {
+      for (int i = 0; i < totalPatients.length - 1; i++) {
+         for (int j = 0; j < totalPatients.length - i - 1; j++) {
+            if (totalPatients[j] < totalPatients[j + 1]) {
+
+               int tempPatients = totalPatients[j];
+               totalPatients[j] = totalPatients[j + 1];
+               totalPatients[j + 1] = tempPatients;
+            }
+         }
+      }
+   }
+
+   // methods to create the table
+   public static void printPatientCountTable(int[][] patientData) {
+
+      System.out.println("\t\t\t\t\t+------------------------------------------------------------------+");
+      System.out.println("\t\t\t\t\t|                     Covid-19 Patients in 2021                    |");
+      System.out.println("\t\t\t\t\t+------------------------------------------------------------------+\n\n");
+
+      System.out.print("       ");
+      for (int month = 0; month < 12; month++) {
+         System.out.printf("%12s", getMonthName(month + 1));
+      }
+      System.out.println("\n");
+
+      int maxDaysInMonth = getMaxDaysInMonth(patientData);
+
+      for (int day = 0; day < maxDaysInMonth; day++) {
+         System.out.printf("%4d ", day + 1);
+
+         for (int month = 0; month < 12; month++) {
+            if (day < patientData[month].length) {
+               System.out.printf("%12d", patientData[month][day]);
+            } else {
+               System.out.print("            ");
+            }
+         }
+
+         System.out.println();
+      }
+   }
+
+   // methods to create the final report
+   public static void printPatientFinalCountTable(int[][] patientData) {
+      System.out.println("\t\t\t\t\t+------------------------------------------------------------------+");
+      System.out.println("\t\t\t\t\t|              Covid-19 Patients Final Report in 2021              |");
+      System.out.println("\t\t\t\t\t+------------------------------------------------------------------+\n\n");
+
+      System.out.print("       ");
+      for (int month = 0; month < 12; month++) {
+         System.out.printf("%12s", getMonthName(month + 1));
+      }
+      System.out.println("\n");
+
+      int maxDaysInMonth = getMaxDaysInMonth(patientData);
+
+      int[] monthlyTotal = new int[12];
+      double[] monthlyAverage = new double[12];
+
+      for (int day = 0; day < maxDaysInMonth; day++) {
+         System.out.printf("%4d ", day + 1);
+
+         for (int month = 0; month < 12; month++) {
+            if (day < patientData[month].length) {
+               int patientCount = patientData[month][day];
+               System.out.printf("%12d", patientCount);
+
+               monthlyTotal[month] += patientCount;
+            } else {
+               System.out.print("            ");
+            }
+         }
+
+         System.out.println();
+      }
+
+      System.out.print("\nTotal");
+      for (int month = 0; month < 12; month++) {
+         System.out.printf("%12d", monthlyTotal[month]);
+      }
+
+      System.out.print("\nAverage");
+      for (int month = 0; month < 12; month++) {
+         monthlyAverage[month] = (double) monthlyTotal[month] / getMaxDaysInMonth(patientData);
+         System.out.printf("%12.2f", monthlyAverage[month]);
+      }
+   }
+
+   public static int getMaxDaysInMonth(int[][] patientData) {
+      int maxDays = 0;
+      for (int month = 0; month < 12; month++) {
+         maxDays = Math.max(maxDays, patientData[month].length);
+      }
+      return maxDays;
+   }
+
 }
