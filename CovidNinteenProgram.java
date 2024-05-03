@@ -1,6 +1,5 @@
 // Please run the program to see all the answers
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class CovidNinteenProgram {
