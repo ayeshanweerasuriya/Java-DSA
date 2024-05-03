@@ -1,3 +1,5 @@
+// Please run the program to see all the answers
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -17,14 +19,15 @@ public class CovidNinteenProgram {
          }
       }
 
-      for (int month = 0; month < 12; month++) {
-         String monthName = getMonthName(month + 1);
-         System.out.println("Patient data for " + monthName + ":");
-         for (int day = 0; day < patientData[month].length; day++) {
-            System.out.println("Day " + (day + 1) + ": " + patientData[month][day] + " patients");
-         }
-         System.out.println();
-      }
+      // for (int month = 0; month < 12; month++) {
+      // String monthName = getMonthName(month + 1);
+      // System.out.println("Patient data for " + monthName + ":");
+      // for (int day = 0; day < patientData[month].length; day++) {
+      // System.out.println("Day " + (day + 1) + ": " + patientData[month][day] + "
+      // patients");
+      // }
+      // System.out.println();
+      // }
 
       // I. Print the number of patients recorded on the following dates
       System.out.println("\nFor I Question ======================================\n");
