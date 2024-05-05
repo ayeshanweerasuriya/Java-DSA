@@ -12,24 +12,23 @@ public class DifferentSearchAlgorithms {
     public static void binarySearch(int[] arr, int targetValue) {
         int low = 0;
         int high = arr.length - 1;
-
-        int midIndex = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            midIndex = (low + high) / 2;
-
+    
+        while (low <= high) {
+            int midIndex = (low + high) / 2;
+    
             if (arr[midIndex] == targetValue) {
-                break;
+                System.out.println("Using Binary search: " + midIndex);
+                return;
+            } else if (arr[midIndex] < targetValue) {
+                low = midIndex + 1;
             } else {
-                if (arr[midIndex] < targetValue) {
-                    low = midIndex++;
-                } else {
-                    high = midIndex--;
-                }
+                high = midIndex - 1;
             }
         }
-        System.out.println("Using Binary search: " + midIndex);
+    
+        System.out.println("Using Binary search: Element not found");
     }
+    
 
     public static void linearSearch(int[] arr, int targetValue) {
         for (int i = 0; i < arr.length; i++) {
