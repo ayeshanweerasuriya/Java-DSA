@@ -1,53 +1,45 @@
-import java.util.Random;
-import java.util.Scanner;
+import java.time.LocalTime;
 
-public class Example {
+class Example {
     public static void main(String[] args) {
-        Random random = new Random(100);
-        Scanner scan = new Scanner(System.in);
+        int[] array = { 2, 10, 5, 30, 50, 1, 5, 3, 6, 8 };
 
-        int[] array = new int[100];
+        // insertionSort(array);
+        selectionSort(array);
 
-        for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextInt(100);
+        for (int e : array) {
+            System.out.print(e + " ");
         }
-
-        int i = 0;
-        for (int num : array) {
-            System.out.println("index " + i + "\t" + num);
-            i++;
-        }
-
-        System.out.print("Input the Target Value: ");
-        int targetValue = scan.nextInt();
-        scan.close();
-
-        jumpSearch(array, targetValue);
     }
 
-    public static void jumpSearch(int[] array, int targetValue) {
-        int arrayLength = array.length;
-        double squreRoot = Math.sqrt(arrayLength);
-        int n = (int) squreRoot;
+    // insertion sort
+    public static void insertionSort(int[] array) {
 
-        System.out.println("\n---------------------------------------------\n");
-        System.out.println("Array Length: " + arrayLength);
-        for (int i = 0; i < array.length; i += n) {
-            if (array[i] == targetValue) {
-                System.out.println("Target value at index: " + i);
-                break;
+        for (int i = 1; i < array.length; i++) {
+            int temp = array[i];
+            int j = i - 1;
+
+            while (j >= 0 && array[j] > temp) {
+                array[j + 1] = array[j];
+                j--;
             }
+            array[j + 1] = temp;
+        }
+    }
 
-            if (array[i] > targetValue) {
-                for (int j = i; i >= n; j--) {
-                    if (array[j] == targetValue) {
-                        System.out.println("Target value at index: " + i);
-                        break;
-                    }
+    public static void selectionSort(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[min] > array[j]) {
+                    min = j;
                 }
             }
-        }
 
-        System.out.println("Target value is not in the array.");
+            int temp = array[i];
+            array[i] = array[min];
+            array[min] = temp;
+        }
     }
+
 }
