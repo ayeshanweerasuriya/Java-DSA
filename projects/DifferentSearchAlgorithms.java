@@ -1,3 +1,5 @@
+package projects;
+
 public class DifferentSearchAlgorithms {
     public static void main(String[] args) {
         int[] arr = new int[] { 12, 35, 47, 59, 62, 73, 81, 93, 111, 121 };
@@ -12,10 +14,10 @@ public class DifferentSearchAlgorithms {
     public static void binarySearch(int[] arr, int targetValue) {
         int low = 0;
         int high = arr.length - 1;
-    
+
         while (low <= high) {
             int midIndex = (low + high) / 2;
-    
+
             if (arr[midIndex] == targetValue) {
                 System.out.println("Using Binary search: " + midIndex);
                 return;
@@ -25,10 +27,9 @@ public class DifferentSearchAlgorithms {
                 high = midIndex - 1;
             }
         }
-    
+
         System.out.println("Using Binary search: Element not found");
     }
-    
 
     public static void linearSearch(int[] arr, int targetValue) {
         for (int i = 0; i < arr.length; i++) {

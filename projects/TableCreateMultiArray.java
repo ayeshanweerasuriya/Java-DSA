@@ -1,3 +1,5 @@
+package projects;
+
 import java.util.Random;
 
 public class TableCreateMultiArray {

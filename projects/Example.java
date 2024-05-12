@@ -1,3 +1,5 @@
+package projects;
+
 import java.time.LocalTime;
 
 class Example {
