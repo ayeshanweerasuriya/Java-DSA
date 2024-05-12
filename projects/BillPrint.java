@@ -1,17 +1,26 @@
+package projects;
+
 import java.util.Scanner;
 
 public class BillPrint {
         public static void main(String[] args) {
                 Scanner scan = new Scanner(System.in);
 
-                System.out.print("==================================================================================\n");
+                System.out.print(
+                                "==================================================================================\n");
                 System.out.println(" __          __  _                            _          _ __  __            _   ");
-                System.out.println(" \\ \\        / / | |                          | |        (_)  \\/  |          | |  ");
-                System.out.println("  \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___  | |_ ___    _| \\  / | __ _ _ __| |_ ");
-                System.out.println("   \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ | __/ _ \\  | | |\\/| |/ _` | '__| __|");
-                System.out.println("    \\  /\\  /  __/ | (_| (_) | | | | | |  __/ | || (_) | | | |  | | (_| | |  | |_ ");
-                System.out.println("     \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|  \\__\\___/  |_|_|  |_|\\__,_|_|   \\__|\n");
-                System.out.print("==================================================================================\n");
+                System.out.println(
+                                " \\ \\        / / | |                          | |        (_)  \\/  |          | |  ");
+                System.out.println(
+                                "  \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___  | |_ ___    _| \\  / | __ _ _ __| |_ ");
+                System.out.println(
+                                "   \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ | __/ _ \\  | | |\\/| |/ _` | '__| __|");
+                System.out.println(
+                                "    \\  /\\  /  __/ | (_| (_) | | | | | |  __/ | || (_) | | | |  | | (_| | |  | |_ ");
+                System.out.println(
+                                "     \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|  \\__\\___/  |_|_|  |_|\\__,_|_|   \\__|\n");
+                System.out.print(
+                                "==================================================================================\n");
 
                 System.out.print("\nEnter Customer Phone Number - ");
                 String number = scan.nextLine();
@@ -19,7 +28,8 @@ public class BillPrint {
                 System.out.print("\nEnter Customer Name         - ");
                 String name = scan.nextLine();
 
-                System.out.print("\n==================================================================================\n");
+                System.out.print(
+                                "\n==================================================================================\n");
 
                 System.out.print("\nBasmathi Qty(kg) - ");
                 int basmathiQuantity = scan.nextInt();
@@ -50,7 +60,8 @@ public class BillPrint {
                 double flourPrice = 120.00;
                 double soapPrice = 160.00;
 
-                System.out.print("\n==================================================================================\n");
+                System.out.print(
+                                "\n==================================================================================\n");
 
                 double basmathiTotalPrice = basmathiQuantity * basmathiPrice;
                 double dhalTotalPrice = dhalQuantity * dhalPrice;
@@ -84,19 +95,26 @@ public class BillPrint {
                 System.out.println("+----------------+-------------+---------------+----------------+");
                 System.out.println("|                |     Qty     |   unit price  |      Price     |");
                 System.out.println("+----------------+-------------+---------------+----------------+");
-                System.out.printf("| # Basmathi     |      %-2d     |       %-6.1f  |       %-6.1f   |\n", basmathiQuantity, basmathiPrice, basmathiTotalPrice);
+                System.out.printf("| # Basmathi     |      %-2d     |       %-6.1f  |       %-6.1f   |\n",
+                                basmathiQuantity, basmathiPrice, basmathiTotalPrice);
                 System.out.println("|                |             |               |                |");
-                System.out.printf("| # Dhal         |      %-2d     |       %-6.1f  |       %-6.1f   |\n", dhalQuantity, dhalPrice, dhalTotalPrice);
+                System.out.printf("| # Dhal         |      %-2d     |       %-6.1f  |       %-6.1f   |\n", dhalQuantity,
+                                dhalPrice, dhalTotalPrice);
                 System.out.println("|                |             |               |                |");
-                System.out.printf("| # Sugar        |      %-2d     |       %-6.1f  |       %-6.1f   |\n", sugarQuantity, sugarPrice, sugarTotalPrice);
+                System.out.printf("| # Sugar        |      %-2d     |       %-6.1f  |       %-6.1f   |\n",
+                                sugarQuantity, sugarPrice, sugarTotalPrice);
                 System.out.println("|                |             |               |                |");
-                System.out.printf("| # Highland     |      %-2d     |       %-6.1f  |       %-7.1f  |\n", highlandQuantity, highlandPrice, highlandTotalPrice);
+                System.out.printf("| # Highland     |      %-2d     |       %-6.1f  |       %-7.1f  |\n",
+                                highlandQuantity, highlandPrice, highlandTotalPrice);
                 System.out.println("|                |             |               |                |");
-                System.out.printf("| # Yogurt       |      %-2d     |       %-6.1f  |       %-6.1f   |\n", yogurtQuantity, yoghurtPrice, yogurtTotalPrice);
+                System.out.printf("| # Yogurt       |      %-2d     |       %-6.1f  |       %-6.1f   |\n",
+                                yogurtQuantity, yoghurtPrice, yogurtTotalPrice);
                 System.out.println("|                |             |               |                |");
-                System.out.printf("| # Flour        |      %-2d     |       %-6.1f  |       %-6.1f   |\n", flourQuantity, flourPrice, flourTotalPrice);
+                System.out.printf("| # Flour        |      %-2d     |       %-6.1f  |       %-6.1f   |\n",
+                                flourQuantity, flourPrice, flourTotalPrice);
                 System.out.println("|                |             |               |                |");
-                System.out.printf("| # Soap         |      %-2d     |       %-6.1f  |       %-6.1f   |\n", soapQuantity, soapPrice, soapTotalPrice);
+                System.out.printf("| # Soap         |      %-2d     |       %-6.1f  |       %-6.1f   |\n", soapQuantity,
+                                soapPrice, soapTotalPrice);
                 System.out.println("|                |             |               |                |");
                 System.out.println("+----------------+-------------+---------------+----------------+");
                 System.out.printf("|                              |  Total        |       %-7.1f  |\n", totalPrice);

@@ -1,3 +1,5 @@
+package projects;
+
 import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
