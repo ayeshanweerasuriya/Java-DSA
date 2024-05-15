@@ -128,7 +128,7 @@ public class RestRecoMiniProject {
                 new Restaurant("La Fiesta", "Mexican", 4.7, 120),
                 new Restaurant("Olive Garden", "Italian", 4.1, 180),
                 new Restaurant("Golden Dragon", "Chinese", 4.3, 160),
-                new Restaurant("Taco Bell", "Mexican", 4.0, 100));
+                new Restaurant("Taco Bell", "Mexican", 1.7, 1000));
 
         // Sample dataset for restaurant catalog
         List<Restaurant> restaurantCatalog = new ArrayList<>(diningHistory); // Assuming catalog is same as dining
