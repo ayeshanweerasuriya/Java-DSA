@@ -1,4 +1,3 @@
-package projects;
 
 public class DifferentSearchAlgorithms {
     public static void main(String[] args) {

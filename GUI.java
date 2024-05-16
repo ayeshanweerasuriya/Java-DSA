@@ -1,4 +1,3 @@
-package projects;
 
 import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
