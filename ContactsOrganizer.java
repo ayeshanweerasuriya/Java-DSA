@@ -3,6 +3,68 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+class Contact {
+    private String id;
+    private String name;
+    private String phoneNumber;
+    private String companyName;
+    private double salary;
+    private String birthday;
+
+    public Contact(String id, String name, String phoneNumber, String companyName, double salary, String birthday) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.companyName = companyName;
+        this.salary = salary;
+        this.birthday = birthday;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public String getCompanyName() {
+        return this.companyName;
+    }
+
+    public double getSalary() {
+        return this.salary;
+    }
+
+    public String getBirthday() {
+        return this.birthday;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public void setBirthDay(String birthDay) {
+        this.birthday = birthDay;
+    }
+}
+
 public class ContactsOrganizer {
     private static int counter = 0;
     public static String[] contactIdArray = new String[0];
@@ -11,6 +73,8 @@ public class ContactsOrganizer {
     public static String[] companyNameArray = new String[0];
     public static String[] salaryArray = new String[0];
     public static String[] birthDayArray = new String[0];
+
+    public static Contact[] contactArray = new Contact[0];
 
     public static void main(String[] args) {
         homepage();
@@ -88,6 +152,186 @@ public class ContactsOrganizer {
             }
 
         } while (mainProgramContinue);
+    }
+
+    // add contact
+    private static void addContact() {
+        Scanner scan = new Scanner(System.in);
+        boolean subProgramContinue = true;
+        String contactId = generateContactId();
+
+        do {
+            System.out.print("\033\143");
+            System.out.println("+--------------------------------------------------------------+");
+            System.out.println("|                    ADD Contact to the list                   |");
+            System.out.println("+--------------------------------------------------------------+");
+            System.out.println("\n\n" + contactId + "\n=======\n");
+
+            System.out.print("Name              : ");
+            String name = scan.nextLine();
+
+            boolean validateLoop = true;
+            String phoneNumber = null;
+            do {
+                System.out.print("Phone Number      : ");
+                phoneNumber = scan.nextLine();
+
+                if (phoneNumber.charAt(0) != '0' || phoneNumber.length() > 10 || phoneNumber.length() < 10) {
+                    invalidInputHandle("phone number");
+                } else {
+                    validateLoop = false;
+                }
+            } while (validateLoop);
+
+            System.out.print("Company name      : ");
+            String companyName = scan.nextLine();
+
+            boolean secondValidateLoop = true;
+            String salary = null;
+            do {
+                System.out.print("Salary            : ");
+                salary = scan.nextLine();
+
+                if (!salaryValidator(salary)) {
+                    invalidInputHandle("salary");
+                } else {
+                    secondValidateLoop = false;
+                }
+            } while (secondValidateLoop);
+
+            boolean thirdValidateLoop = true;
+            String birthday = null;
+            do {
+                System.out.print("B'Day (YYYY-MM-DD): ");
+                birthday = scan.nextLine();
+
+                if (!dataValidator(birthday)) {
+                    invalidInputHandle("birthday");
+                } else {
+                    thirdValidateLoop = false;
+                }
+            } while (thirdValidateLoop);
+
+            extendArrays();
+            // contactIdArray[contactIdArray.length - 1] = contactId;
+            // contactNameArray[contactIdArray.length - 1] = name;
+            // phoneNumberArray[phoneNumberArray.length - 1] = phoneNumber;
+            // companyNameArray[companyNameArray.length - 1] = companyName;
+            // salaryArray[salaryArray.length - 1] = salary;
+            // birthDayArray[birthDayArray.length - 1] = birthday;
+
+            Contact contact = new Contact(contactId, name, phoneNumber, companyName, counter, birthday);
+
+            contactArray[contactArray.length - 1] = contact;
+
+            successHandle(1, "added", "add");
+
+        } while (subProgramContinue);
+    }
+
+    // extend arrays
+    public static void extendArrays() {
+        // String[] tempContactId = new String[contactIdArray.length + 1];
+        // String[] tempContactName = new String[contactIdArray.length + 1];
+        // String[] tempPhoneNumber = new String[phoneNumberArray.length + 1];
+        // String[] tempCompanyName = new String[companyNameArray.length + 1];
+        // String[] tempSalary = new String[salaryArray.length + 1];
+        // String[] tempBirthDay = new String[birthDayArray.length + 1];
+
+        Contact[] tempContactArray = new Contact[contactArray.length + 1];
+
+        for (int i = 0; i < contactArray.length; i++) {
+            tempContactArray[i] = contactArray[i];
+        }
+
+        // for (int i = 0; i < contactIdArray.length; i++) {
+        // tempContactId[i] = contactIdArray[i];
+        // tempContactName[i] = contactNameArray[i];
+        // tempPhoneNumber[i] = phoneNumberArray[i];
+        // tempCompanyName[i] = companyNameArray[i];
+        // tempSalary[i] = salaryArray[i];
+        // tempBirthDay[i] = birthDayArray[i];
+        // }
+
+        // contactIdArray = tempContactId;
+        // contactNameArray = tempContactName;
+        // phoneNumberArray = tempPhoneNumber;
+        // companyNameArray = tempCompanyName;
+        // salaryArray = tempSalary;
+        // birthDayArray = tempBirthDay;
+
+        contactArray = tempContactArray;
+    }
+
+    // search contact
+    private static void searchContact() {
+        Scanner scan = new Scanner(System.in);
+        boolean subProgramContinue = true;
+        do {
+            System.out.print("\033\143");
+            System.out.println("+--------------------------------------------------------------+");
+            System.out.println("|                         Search Contact                       |");
+            System.out.println("+--------------------------------------------------------------+\n\n");
+            System.out.print("Search Contact by Name or Phone Number: ");
+            String search = scan.nextLine();
+
+            // int indexOfContact = -1;
+            // for (int i = 0; i < contactNameArray.length; i++) {
+            // if (search.equals(contactNameArray[i])) {
+            // indexOfContact = i;
+            // break;
+            // }
+            // }
+
+            // if (indexOfContact == -1) {
+            // for (int i = 0; i < phoneNumberArray.length; i++) {
+            // if (search.equals(phoneNumberArray[i])) {
+            // indexOfContact = i;
+            // break;
+            // }
+            // }
+            // }
+
+            int indexOfContact = -1;
+            for (int i = 0; i < contactArray.length; i++) {
+                if (search.equals(contactArray[i].getName())) {
+                    indexOfContact = i;
+                    break;
+                }
+            }
+
+            if (indexOfContact == -1) {
+                for (int i = 0; i < contactArray.length; i++) {
+                    if (search.equals(contactArray[i].getPhoneNumber())) {
+                        indexOfContact = i;
+                        break;
+                    }
+                }
+            }
+
+            if (indexOfContact == -1) {
+                System.out.println("\n\tNo contact found for " + search + "...");
+                successHandle(4, null, "search");
+
+            } else {
+                // System.out.println("\n\n\tContact ID : " + contactIdArray[indexOfContact]);
+                // System.out.println("\tName : " + contactNameArray[indexOfContact]);
+                // System.out.println("\tPhone Number : " + phoneNumberArray[indexOfContact]);
+                // System.out.println("\tCompany Name : " + companyNameArray[indexOfContact]);
+                // System.out.println("\tSalary : " + salaryArray[indexOfContact]);
+                // System.out.println("\tB'Day (YYYY-MM-DD) : " +
+                // birthDayArray[indexOfContact]);
+
+                System.out.println("\n\n\tContact ID         : " + contactArray[indexOfContact].getId());
+                System.out.println("\tName               : " + contactArray[indexOfContact].getName());
+                System.out.println("\tPhone Number       : " + contactArray[indexOfContact].getPhoneNumber());
+                System.out.println("\tCompany Name       : " + contactArray[indexOfContact].getCompanyName());
+                System.out.println("\tSalary             : " + contactArray[indexOfContact].getSalary());
+                System.out.println("\tB'Day (YYYY-MM-DD) : " + contactArray[indexOfContact].getBirthday());
+
+                successHandle(4, null, "search");
+            }
+        } while (subProgramContinue);
     }
 
     // list contact
@@ -325,53 +569,6 @@ public class ContactsOrganizer {
         }
     }
 
-    // search contact
-    private static void searchContact() {
-        Scanner scan = new Scanner(System.in);
-        boolean subProgramContinue = true;
-        do {
-            System.out.print("\033\143");
-            System.out.println("+--------------------------------------------------------------+");
-            System.out.println("|                         Search Contact                       |");
-            System.out.println("+--------------------------------------------------------------+\n\n");
-            System.out.print("Search Contact by Name or Phone Number: ");
-            String search = scan.nextLine();
-
-            int indexOfContact = -1;
-            for (int i = 0; i < contactNameArray.length; i++) {
-                if (search.equals(contactNameArray[i])) {
-                    indexOfContact = i;
-                    break;
-                }
-            }
-
-            if (indexOfContact == -1) {
-                for (int i = 0; i < phoneNumberArray.length; i++) {
-                    if (search.equals(phoneNumberArray[i])) {
-                        indexOfContact = i;
-                        break;
-                    }
-                }
-
-            }
-
-            if (indexOfContact == -1) {
-                System.out.println("\n\tNo contact found for " + search + "...");
-                successHandle(4, null, "search");
-
-            } else {
-                System.out.println("\n\n\tContact ID         : " + contactIdArray[indexOfContact]);
-                System.out.println("\tName               : " + contactNameArray[indexOfContact]);
-                System.out.println("\tPhone Number       : " + phoneNumberArray[indexOfContact]);
-                System.out.println("\tCompany Name       : " + companyNameArray[indexOfContact]);
-                System.out.println("\tSalary             : " + salaryArray[indexOfContact]);
-                System.out.println("\tB'Day (YYYY-MM-DD) : " + birthDayArray[indexOfContact]);
-
-                successHandle(4, null, "search");
-            }
-        } while (subProgramContinue);
-    }
-
     // delete contact
     private static void deleteContact() {
         Scanner scan = new Scanner(System.in);
@@ -385,16 +582,16 @@ public class ContactsOrganizer {
             String search = scan.nextLine();
 
             int indexOfContact = -1;
-            for (int i = 0; i < contactNameArray.length; i++) {
-                if (search.equals(contactNameArray[i])) {
+            for (int i = 0; i < contactArray.length; i++) {
+                if (search.equals(contactArray[i].getName())) {
                     indexOfContact = i;
                     break;
                 }
             }
 
             if (indexOfContact == -1) {
-                for (int i = 0; i < phoneNumberArray.length; i++) {
-                    if (search.equals(phoneNumberArray[i])) {
+                for (int i = 0; i < contactArray.length; i++) {
+                    if (search.equals(contactArray[i].getPhoneNumber())) {
                         indexOfContact = i;
                         break;
                     }
@@ -406,23 +603,33 @@ public class ContactsOrganizer {
                 successHandle(3, null, "search");
 
             } else {
-                System.out.println("\n\n\tContact ID         : " + contactIdArray[indexOfContact]);
-                System.out.println("\tName               : " + contactNameArray[indexOfContact]);
-                System.out.println("\tPhone Number       : " + phoneNumberArray[indexOfContact]);
-                System.out.println("\tCompany Name       : " + companyNameArray[indexOfContact]);
-                System.out.println("\tSalary             : " + salaryArray[indexOfContact]);
-                System.out.println("\tB'Day (YYYY-MM-DD) : " + birthDayArray[indexOfContact]);
+                // System.out.println("\n\n\tContact ID : " + contactIdArray[indexOfContact]);
+                // System.out.println("\tName : " + contactNameArray[indexOfContact]);
+                // System.out.println("\tPhone Number : " + phoneNumberArray[indexOfContact]);
+                // System.out.println("\tCompany Name : " + companyNameArray[indexOfContact]);
+                // System.out.println("\tSalary : " + salaryArray[indexOfContact]);
+                // System.out.println("\tB'Day (YYYY-MM-DD) : " +
+                // birthDayArray[indexOfContact]);
+
+                System.out.println("\n\n\tContact ID         : " + contactArray[indexOfContact].getId());
+                System.out.println("\tName               : " + contactArray[indexOfContact].getName());
+                System.out.println("\tPhone Number       : " + contactArray[indexOfContact].getPhoneNumber());
+                System.out.println("\tCompany Name       : " + contactArray[indexOfContact].getCompanyName());
+                System.out.println("\tSalary             : " + contactArray[indexOfContact].getSalary());
+                System.out.println("\tB'Day (YYYY-MM-DD) : " + contactArray[indexOfContact].getBirthday());
 
                 System.out.print("\n\nDo you want to delete this contact (Y/N): ");
                 char option = scan.next().toUpperCase().charAt(0);
 
                 if (option == 'Y') {
-                    contactIdArray = removeElement(contactIdArray, indexOfContact);
-                    contactNameArray = removeElement(contactNameArray, indexOfContact);
-                    phoneNumberArray = removeElement(phoneNumberArray, indexOfContact);
-                    companyNameArray = removeElement(companyNameArray, indexOfContact);
-                    salaryArray = removeElement(salaryArray, indexOfContact);
-                    birthDayArray = removeElement(birthDayArray, indexOfContact);
+                    // contactIdArray = removeElement(contactIdArray, indexOfContact);
+                    // contactNameArray = removeElement(contactNameArray, indexOfContact);
+                    // phoneNumberArray = removeElement(phoneNumberArray, indexOfContact);
+                    // companyNameArray = removeElement(companyNameArray, indexOfContact);
+                    // salaryArray = removeElement(salaryArray, indexOfContact);
+                    // birthDayArray = removeElement(birthDayArray, indexOfContact);
+
+                    contactArray = removeElement(indexOfContact);
 
                     successHandle(3, "deleted", "delete");
                 } else {
@@ -434,14 +641,23 @@ public class ContactsOrganizer {
     }
 
     // delete elements
-    public static String[] removeElement(String[] array, int index) {
-        String[] newArray = new String[array.length - 1];
-        for (int i = 0, j = 0; i < array.length; i++) {
+    public static Contact[] removeElement(int index) {
+        // Check if the index is within bounds
+        if (index < 0 || index >= contactArray.length) {
+            throw new IndexOutOfBoundsException("Index out of range.");
+        }
+
+        // Create a new array with one less element
+        Contact[] newContactArray = new Contact[contactArray.length - 1];
+
+        // Copy all elements except the one at the specified index
+        for (int i = 0, j = 0; i < contactArray.length; i++) {
             if (i != index) {
-                newArray[j++] = array[i];
+                newContactArray[j++] = contactArray[i];
             }
         }
-        return newArray;
+
+        return newContactArray;
     }
 
     // update contact
@@ -606,77 +822,6 @@ public class ContactsOrganizer {
         successHandle(2, "updated", "update");
     }
 
-    // add contact
-    private static void addContact() {
-        Scanner scan = new Scanner(System.in);
-        boolean subProgramContinue = true;
-        String contactId = generateContactId();
-
-        do {
-            System.out.print("\033\143");
-            System.out.println("+--------------------------------------------------------------+");
-            System.out.println("|                    ADD Contact to the list                   |");
-            System.out.println("+--------------------------------------------------------------+");
-            System.out.println("\n\n" + contactId + "\n=======\n");
-
-            System.out.print("Name              : ");
-            String name = scan.nextLine();
-
-            boolean validateLoop = true;
-            String phoneNumber = null;
-            do {
-                System.out.print("Phone Number      : ");
-                phoneNumber = scan.nextLine();
-
-                if (phoneNumber.charAt(0) != '0' || phoneNumber.length() > 10 || phoneNumber.length() < 10) {
-                    invalidInputHandle("phone number");
-                } else {
-                    validateLoop = false;
-                }
-            } while (validateLoop);
-
-            System.out.print("Company name      : ");
-            String companyName = scan.nextLine();
-
-            boolean secondValidateLoop = true;
-            String salary = null;
-            do {
-                System.out.print("Salary            : ");
-                salary = scan.nextLine();
-
-                if (!salaryValidator(salary)) {
-                    invalidInputHandle("salary");
-                } else {
-                    secondValidateLoop = false;
-                }
-            } while (secondValidateLoop);
-
-            boolean thirdValidateLoop = true;
-            String birthday = null;
-            do {
-                System.out.print("B'Day (YYYY-MM-DD): ");
-                birthday = scan.nextLine();
-
-                if (!dataValidator(birthday)) {
-                    invalidInputHandle("birthday");
-                } else {
-                    thirdValidateLoop = false;
-                }
-            } while (thirdValidateLoop);
-
-            extendArrays();
-            contactNameArray[contactIdArray.length - 1] = name;
-            contactIdArray[contactIdArray.length - 1] = contactId;
-            phoneNumberArray[phoneNumberArray.length - 1] = phoneNumber;
-            companyNameArray[companyNameArray.length - 1] = companyName;
-            salaryArray[salaryArray.length - 1] = salary;
-            birthDayArray[birthDayArray.length - 1] = birthday;
-
-            successHandle(1, "added", "add");
-
-        } while (subProgramContinue);
-    }
-
     // invalid input handler
     public static void invalidInputHandle(String valueType) {
         Scanner scan = new Scanner(System.in);
@@ -714,32 +859,6 @@ public class ContactsOrganizer {
         }
 
         return true;
-    }
-
-    // extend arrays
-    public static void extendArrays() {
-        String[] tempContactId = new String[contactIdArray.length + 1];
-        String[] tempContactName = new String[contactIdArray.length + 1];
-        String[] tempPhoneNumber = new String[phoneNumberArray.length + 1];
-        String[] tempCompanyName = new String[companyNameArray.length + 1];
-        String[] tempSalary = new String[salaryArray.length + 1];
-        String[] tempBirthDay = new String[birthDayArray.length + 1];
-
-        for (int i = 0; i < contactIdArray.length; i++) {
-            tempContactId[i] = contactIdArray[i];
-            tempContactName[i] = contactNameArray[i];
-            tempPhoneNumber[i] = phoneNumberArray[i];
-            tempCompanyName[i] = companyNameArray[i];
-            tempSalary[i] = salaryArray[i];
-            tempBirthDay[i] = birthDayArray[i];
-        }
-
-        contactIdArray = tempContactId;
-        contactNameArray = tempContactName;
-        phoneNumberArray = tempPhoneNumber;
-        companyNameArray = tempCompanyName;
-        salaryArray = tempSalary;
-        birthDayArray = tempBirthDay;
     }
 
     // generate contact id
