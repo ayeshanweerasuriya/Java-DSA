@@ -1,99 +1,77 @@
-class Box {
-    private int length;
-    private int width;
-    private int height;
+class Stack {
+    private int[] dataArray;
 
-    public Box() {
-        this.length = 0;
-        this.width = 0;
-        this.height = 0;
+    Stack() {
+        dataArray = new int[0];
     }
 
-    public Box(int length, int width, int height) {
-        this.length = length;
-        this.width = width;
-        this.height = height;
+    private void extendsArray() {
+        int[] tempDataArray = new int[dataArray.length + 1];
+        for (int i = 0; i < dataArray.length; i++) {
+            tempDataArray[i] = dataArray[i];
+        }
+        dataArray = tempDataArray;
     }
 
-    public Box(int side) {
-        this.length = side;
-        this.width = side;
-        this.height = side;
+    public void push(int data) {
+        extendsArray();
+        dataArray[dataArray.length - 1] = data;
     }
 
-    public Box(Box other) {
-        this.length = other.length;
-        this.width = other.width;
-        this.height = other.height;
+    public void printStack() {
+        System.out.print("[");
+        for (int i = dataArray.length - 1; i >= 0; i--) {
+            System.out.print(dataArray[i] + ", ");
+        }
+        System.out.println(isEmpty() ? "empty]" : "\b\b]");
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    private boolean isEmpty() {
+        return dataArray.length == 0;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
+    public void pop() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty..");
+        } else {
+            int[] tempDataArray = new int[dataArray.length - 1];
+            for (int i = 0; i < tempDataArray.length; i++) {
+                tempDataArray[i] = dataArray[i];
+            }
+            dataArray = tempDataArray;
+        }
     }
 
-    public void setHeight(int height) {
-        this.height = height;
+    public int size() {
+        return dataArray.length;
     }
 
-    public void setDimension(int length, int width, int height) {
-        this.length = length;
-        this.width = width;
-        this.height = height;
-    }
-
-    public void setDimension(int side) {
-        this.length = side;
-        this.width = side;
-        this.height = side;
-    }
-
-    public void setDimension(Box other) {
-        this.length = other.length;
-        this.width = other.width;
-        this.height = other.height;
-    }
-
-    public int getVolume() {
-        return this.length * this.width * this.height;
-    }
-
-    public void printVolume() {
-        System.out.println("Volume: " + getVolume());
-    }
-
-    public Box getCopy() {
-        return new Box(this);
+    public void clear() {
+        dataArray = new int[0];
     }
 }
 
 class Demo {
     public static void main(String args[]) {
-        Box b1 = new Box();
-        b1.setLength(12);
-        b1.setWidth(5);
-        b1.setHeight(3);
-        b1.printVolume();
-        b1.setDimension(120, 50, 30);
-        System.out.println("Volume " + b1.getVolume());
-        Box b2 = new Box(4, 2, 3);
-        b2.printVolume();
-        Box b3 = new Box(b2);
+        Stack s1 = new Stack();
+        s1.printStack(); // [empty]
+        System.out.println("Size : " + s1.size()); // 0
+        s1.push(10);
+        s1.push(20);
+        s1.push(30);
+        s1.push(40);
+        s1.push(50);
+        s1.printStack(); // [50,40,30,20,10]
+        System.out.println("Size : " + s1.size()); // 5
 
-        b3.printVolume();
-        Box b4 = new Box(10);
-        b4.printVolume();
-        Box b5 = new Box();
-        b5.setDimension(12);
-        b5.printVolume();
-        Box b6 = new Box();
-        b6.printVolume();
-        b6.setDimension(b1);
-        b6.printVolume();
-        Box b7 = b3.getCopy();
-        b7.printVolume();
+        s1.push(60);
+        s1.printStack(); // [60,50,40,30,20,10]
+
+        s1.push(70);
+        s1.printStack(); // [70,60,50,40,30,20,10]
+
+        s1.clear();
+        s1.pop(); // Stack is empty..
+
     }
 }
