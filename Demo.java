@@ -1,69 +1,88 @@
-class PriorityQueue {
-    private int[] array;
+class PatientQueue {
+    private Patient[] array;
     private int nextIndex;
 
-    public PriorityQueue(int initialSize) {
-        this.array = new int[initialSize];
+    public PatientQueue() {
+        this.array = new Patient[2];
         this.nextIndex = 0;
     }
 
-    public void enQueue(int value) {
-        this.array[nextIndex++] = value;
-        bringMaxToFront();
+    public void enQueue(Patient patient) {
+        if (nextIndex >= array.length) {
+            resizeArray();
+        }
+        this.array[nextIndex++] = patient;
     }
 
-    public void deQueue() {
+    public int deQueue() {
+        Patient[] tempArray = new Patient[nextIndex - 1];
 
         for (int i = 1; i < nextIndex; i++) {
-            array[i - 1] = array[i];
+            tempArray[i - 1] = array[i];
         }
+        array = tempArray;
         nextIndex--;
+
+        return 0;
     }
 
-    private void bringMaxToFront() {
-        if (nextIndex <= 1) {
-            return;
+    public void resizeArray() {
+        Patient[] tempArray = new Patient[array.length * 2];
+
+        for (int i = 0; i < array.length; i++) {
+            tempArray[i] = array[i];
         }
 
-        int maxIndex = 0;
-        for (int i = 1; i < nextIndex; i++) {
-            if (array[i] > array[maxIndex]) {
-                maxIndex = i;
-            }
-        }
-
-        int maxValue = array[maxIndex];
-        for (int i = maxIndex; i > 0; i--) {
-            array[i] = array[i - 1];
-        }
-        array[0] = maxValue;
+        array = tempArray;
     }
 
     public void printQueue() {
-        System.out.print("[");
+        System.out.print("{");
         for (int i = 0; i < nextIndex; i++) {
-            System.out.print(array[i]);
-            if (i < nextIndex - 1) {
-                System.out.print(", ");
-            }
+            System.out.print("[" + array[i].getId() + "-" + array[i].getName() + "], ");
         }
-        System.out.println("]");
+        System.out.print("\b\b}");
     }
+
+}
+
+class Patient {
+    private int id;
+    private String name;
+
+    public Patient(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void getPatientDetail() {
+        PatientQueue.array
+    }
+
 }
 
 class Demo {
     public static void main(String args[]) {
-        PriorityQueue pq = new PriorityQueue(10); // PriorityQueue(int initialSize)
-        pq.enQueue(12);
-        pq.enQueue(90);
-        pq.enQueue(16);
-        pq.enQueue(45);
-        pq.enQueue(96);
-        pq.enQueue(23);
-        pq.printQueue(); // [96, 16, 12, 90, 45, 23]
-        pq.deQueue();
-        pq.printQueue(); // [90, 16, 23, 45, 12]
-        pq.deQueue();
-        pq.printQueue(); // [45, 16, 23, 12]
+        PatientQueue queue = new PatientQueue();
+        queue.enQueue(new Patient(101, "Amal"));
+        queue.enQueue(new Patient(102, "Nimal"));
+        queue.enQueue(new Patient(103, "Ramal"));
+        queue.enQueue(new Patient(104, "Bimal"));
+        queue.printQueue(); // {[101-Amal], [102-Niaml], [103-Ramal], [104-Bimal]}
+        Patient firstPatient = queue.deQueue();
+        System.out.println(firstPatient.getPatientDetail()); // [1001-Amal]
+        // queue.printQueue(); // {[102-Niaml], [103-Ramal], [104-Bimal]}
+        // System.out.println("No of patient of the queue : " + queue.size()); // 3
+        // queue.clear();
+        // queue.printQueue(); // {Empty}
+        // System.out.println("No of patient of the queue : " + queue.size()); // 0
     }
 }
