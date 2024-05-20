@@ -14,7 +14,8 @@ class PatientQueue {
         this.array[nextIndex++] = patient;
     }
 
-    public int deQueue() {
+    public Patient deQueue() {
+        Patient firstPatient = array[0];
         Patient[] tempArray = new Patient[nextIndex - 1];
 
         for (int i = 1; i < nextIndex; i++) {
@@ -23,7 +24,7 @@ class PatientQueue {
         array = tempArray;
         nextIndex--;
 
-        return 0;
+        return firstPatient;
     }
 
     public void resizeArray() {
@@ -38,10 +39,23 @@ class PatientQueue {
 
     public void printQueue() {
         System.out.print("{");
-        for (int i = 0; i < nextIndex; i++) {
-            System.out.print("[" + array[i].getId() + "-" + array[i].getName() + "], ");
+
+        if (nextIndex <= 0) {
+            System.out.println("Empty}");
+        } else {
+            for (int i = 0; i < nextIndex; i++) {
+                System.out.print("[" + array[i].getId() + "-" + array[i].getName() + "], ");
+            }
+            System.out.println("\b\b}");
         }
-        System.out.print("\b\b}");
+    }
+
+    public int size() {
+        return nextIndex;
+    }
+
+    public void clear() {
+        nextIndex = 0;
     }
 
 }
@@ -63,8 +77,8 @@ class Patient {
         return name;
     }
 
-    public void getPatientDetail() {
-        PatientQueue.array
+    public String getPatientDetail() {
+        return "[" + id + "-" + name + "]";
     }
 
 }
@@ -79,10 +93,10 @@ class Demo {
         queue.printQueue(); // {[101-Amal], [102-Niaml], [103-Ramal], [104-Bimal]}
         Patient firstPatient = queue.deQueue();
         System.out.println(firstPatient.getPatientDetail()); // [1001-Amal]
-        // queue.printQueue(); // {[102-Niaml], [103-Ramal], [104-Bimal]}
-        // System.out.println("No of patient of the queue : " + queue.size()); // 3
-        // queue.clear();
-        // queue.printQueue(); // {Empty}
-        // System.out.println("No of patient of the queue : " + queue.size()); // 0
+        queue.printQueue(); // {[102-Niaml], [103-Ramal], [104-Bimal]}
+        System.out.println("No of patient of the queue : " + queue.size()); // 3
+        queue.clear();
+        queue.printQueue(); // {Empty}
+        System.out.println("No of patient of the queue : " + queue.size()); // 0
     }
 }
