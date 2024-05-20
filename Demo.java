@@ -1,77 +1,88 @@
-class Stack {
-    private int[] dataArray;
+class PatientQueue {
+    private Patient[] array;
+    private int nextIndex;
 
-    Stack() {
-        dataArray = new int[0];
+    public PatientQueue() {
+        this.array = new Patient[2];
+        this.nextIndex = 0;
     }
 
-    private void extendsArray() {
-        int[] tempDataArray = new int[dataArray.length + 1];
-        for (int i = 0; i < dataArray.length; i++) {
-            tempDataArray[i] = dataArray[i];
+    public void enQueue(Patient patient) {
+        if (nextIndex >= array.length) {
+            resizeArray();
         }
-        dataArray = tempDataArray;
+        this.array[nextIndex++] = patient;
     }
 
-    public void push(int data) {
-        extendsArray();
-        dataArray[dataArray.length - 1] = data;
-    }
+    public int deQueue() {
+        Patient[] tempArray = new Patient[nextIndex - 1];
 
-    public void printStack() {
-        System.out.print("[");
-        for (int i = dataArray.length - 1; i >= 0; i--) {
-            System.out.print(dataArray[i] + ", ");
+        for (int i = 1; i < nextIndex; i++) {
+            tempArray[i - 1] = array[i];
         }
-        System.out.println(isEmpty() ? "empty]" : "\b\b]");
+        array = tempArray;
+        nextIndex--;
+
+        return 0;
     }
 
-    private boolean isEmpty() {
-        return dataArray.length == 0;
-    }
+    public void resizeArray() {
+        Patient[] tempArray = new Patient[array.length * 2];
 
-    public void pop() {
-        if (isEmpty()) {
-            System.out.println("Stack is empty..");
-        } else {
-            int[] tempDataArray = new int[dataArray.length - 1];
-            for (int i = 0; i < tempDataArray.length; i++) {
-                tempDataArray[i] = dataArray[i];
-            }
-            dataArray = tempDataArray;
+        for (int i = 0; i < array.length; i++) {
+            tempArray[i] = array[i];
         }
+
+        array = tempArray;
     }
 
-    public int size() {
-        return dataArray.length;
+    public void printQueue() {
+        System.out.print("{");
+        for (int i = 0; i < nextIndex; i++) {
+            System.out.print("[" + array[i].getId() + "-" + array[i].getName() + "], ");
+        }
+        System.out.print("\b\b}");
     }
 
-    public void clear() {
-        dataArray = new int[0];
+}
+
+class Patient {
+    private int id;
+    private String name;
+
+    public Patient(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void getPatientDetail() {
+        PatientQueue.array
+    }
+
 }
 
 class Demo {
     public static void main(String args[]) {
-        Stack s1 = new Stack();
-        s1.printStack(); // [empty]
-        System.out.println("Size : " + s1.size()); // 0
-        s1.push(10);
-        s1.push(20);
-        s1.push(30);
-        s1.push(40);
-        s1.push(50);
-        s1.printStack(); // [50,40,30,20,10]
-        System.out.println("Size : " + s1.size()); // 5
-
-        s1.push(60);
-        s1.printStack(); // [60,50,40,30,20,10]
-
-        s1.push(70);
-        s1.printStack(); // [70,60,50,40,30,20,10]
-
-        s1.clear();
-        s1.pop(); // Stack is empty..
-
+        PatientQueue queue = new PatientQueue();
+        queue.enQueue(new Patient(101, "Amal"));
+        queue.enQueue(new Patient(102, "Nimal"));
+        queue.enQueue(new Patient(103, "Ramal"));
+        queue.enQueue(new Patient(104, "Bimal"));
+        queue.printQueue(); // {[101-Amal], [102-Niaml], [103-Ramal], [104-Bimal]}
+        Patient firstPatient = queue.deQueue();
+        System.out.println(firstPatient.getPatientDetail()); // [1001-Amal]
+        // queue.printQueue(); // {[102-Niaml], [103-Ramal], [104-Bimal]}
+        // System.out.println("No of patient of the queue : " + queue.size()); // 3
+        // queue.clear();
+        // queue.printQueue(); // {Empty}
+        // System.out.println("No of patient of the queue : " + queue.size()); // 0
     }
 }
