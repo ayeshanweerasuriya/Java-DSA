@@ -1,77 +1,69 @@
-class Stack {
-    private int[] dataArray;
+class PriorityQueue {
+    private int[] array;
+    private int nextIndex;
 
-    Stack() {
-        dataArray = new int[0];
+    public PriorityQueue(int initialSize) {
+        this.array = new int[initialSize];
+        this.nextIndex = 0;
     }
 
-    private void extendsArray() {
-        int[] tempDataArray = new int[dataArray.length + 1];
-        for (int i = 0; i < dataArray.length; i++) {
-            tempDataArray[i] = dataArray[i];
+    public void enQueue(int value) {
+        this.array[nextIndex++] = value;
+        bringMaxToFront();
+    }
+
+    public void deQueue() {
+
+        for (int i = 1; i < nextIndex; i++) {
+            array[i - 1] = array[i];
         }
-        dataArray = tempDataArray;
+        nextIndex--;
     }
 
-    public void push(int data) {
-        extendsArray();
-        dataArray[dataArray.length - 1] = data;
-    }
-
-    public void printStack() {
-        System.out.print("[");
-        for (int i = dataArray.length - 1; i >= 0; i--) {
-            System.out.print(dataArray[i] + ", ");
+    private void bringMaxToFront() {
+        if (nextIndex <= 1) {
+            return;
         }
-        System.out.println(isEmpty() ? "empty]" : "\b\b]");
-    }
 
-    private boolean isEmpty() {
-        return dataArray.length == 0;
-    }
-
-    public void pop() {
-        if (isEmpty()) {
-            System.out.println("Stack is empty..");
-        } else {
-            int[] tempDataArray = new int[dataArray.length - 1];
-            for (int i = 0; i < tempDataArray.length; i++) {
-                tempDataArray[i] = dataArray[i];
+        int maxIndex = 0;
+        for (int i = 1; i < nextIndex; i++) {
+            if (array[i] > array[maxIndex]) {
+                maxIndex = i;
             }
-            dataArray = tempDataArray;
         }
+
+        int maxValue = array[maxIndex];
+        for (int i = maxIndex; i > 0; i--) {
+            array[i] = array[i - 1];
+        }
+        array[0] = maxValue;
     }
 
-    public int size() {
-        return dataArray.length;
-    }
-
-    public void clear() {
-        dataArray = new int[0];
+    public void printQueue() {
+        System.out.print("[");
+        for (int i = 0; i < nextIndex; i++) {
+            System.out.print(array[i]);
+            if (i < nextIndex - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
     }
 }
 
 class Demo {
     public static void main(String args[]) {
-        Stack s1 = new Stack();
-        s1.printStack(); // [empty]
-        System.out.println("Size : " + s1.size()); // 0
-        s1.push(10);
-        s1.push(20);
-        s1.push(30);
-        s1.push(40);
-        s1.push(50);
-        s1.printStack(); // [50,40,30,20,10]
-        System.out.println("Size : " + s1.size()); // 5
-
-        s1.push(60);
-        s1.printStack(); // [60,50,40,30,20,10]
-
-        s1.push(70);
-        s1.printStack(); // [70,60,50,40,30,20,10]
-
-        s1.clear();
-        s1.pop(); // Stack is empty..
-
+        PriorityQueue pq = new PriorityQueue(10); // PriorityQueue(int initialSize)
+        pq.enQueue(12);
+        pq.enQueue(90);
+        pq.enQueue(16);
+        pq.enQueue(45);
+        pq.enQueue(96);
+        pq.enQueue(23);
+        pq.printQueue(); // [96, 16, 12, 90, 45, 23]
+        pq.deQueue();
+        pq.printQueue(); // [90, 16, 23, 45, 12]
+        pq.deQueue();
+        pq.printQueue(); // [45, 16, 23, 12]
     }
 }
