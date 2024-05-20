@@ -1,88 +1,135 @@
-class PatientQueue {
-    private Patient[] array;
+class Registry {
+    private int[] array;
     private int nextIndex;
 
-    public PatientQueue() {
-        this.array = new Patient[2];
-        this.nextIndex = 0;
+    public Registry(int capacity) {
+        array = new int[capacity];
+        nextIndex = 0;
     }
 
-    public void enQueue(Patient patient) {
-        if (nextIndex >= array.length) {
-            resizeArray();
-        }
-        this.array[nextIndex++] = patient;
+    public void add(int value) {
+        array[nextIndex++] = value;
     }
 
-    public int deQueue() {
-        Patient[] tempArray = new Patient[nextIndex - 1];
-
-        for (int i = 1; i < nextIndex; i++) {
-            tempArray[i - 1] = array[i];
-        }
-        array = tempArray;
-        nextIndex--;
-
-        return 0;
-    }
-
-    public void resizeArray() {
-        Patient[] tempArray = new Patient[array.length * 2];
-
-        for (int i = 0; i < array.length; i++) {
+    public void add(int index, int value) {
+        int[] tempArray = new int[nextIndex + 1];
+        for (int i = 0; i < index; i++) {
             tempArray[i] = array[i];
         }
 
+        tempArray[index] = value;
+
+        for (int i = index; i < nextIndex; i++) {
+            tempArray[i + 1] = array[i];
+        }
+
+        nextIndex++;
         array = tempArray;
     }
 
-    public void printQueue() {
-        System.out.print("{");
+    public void add(int[] newArray) {
+        int[] tempArray = new int[nextIndex + newArray.length];
         for (int i = 0; i < nextIndex; i++) {
-            System.out.print("[" + array[i].getId() + "-" + array[i].getName() + "], ");
+            tempArray[i] = array[i];
         }
-        System.out.print("\b\b}");
+
+        for (int i = 0; i < newArray.length; i++) {
+            tempArray[i + nextIndex] = newArray[i];
+        }
+
+        array = tempArray;
+        nextIndex += newArray.length;
     }
 
-}
+    public void add(int index, int[] newArray) {
+        int[] tempArray = new int[nextIndex + newArray.length];
 
-class Patient {
-    private int id;
-    private String name;
+        for (int i = 0; i < index; i++) {
+            tempArray[i] = array[i];
+        }
 
-    public Patient(int id, String name) {
-        this.id = id;
-        this.name = name;
+        for (int i = 0; i < newArray.length; i++) {
+            tempArray[i + index] = newArray[i];
+        }
+
+        for (int i = index; i < nextIndex; i++) {
+            tempArray[i + newArray.length] = array[i];
+        }
+
+        array = tempArray;
+        nextIndex += newArray.length;
     }
 
-    public int getId() {
-        return id;
+    public void remove(int index) {
+        int[] tempArray = new int[nextIndex - 1];
+
+        for (int i = 0; i < index; i++) {
+            tempArray[i] = array[i];
+        }
+
+        for (int i = index; i < tempArray.length; i++) {
+            tempArray[i] = array[i + 1];
+        }
+
+        array = tempArray;
+        nextIndex--;
     }
 
-    public String getName() {
-        return name;
+    public void printRegistry() {
+        System.out.print("[");
+        for (int i = 0; i < nextIndex; i++) {
+            System.out.print(array[i] + ", ");
+        }
+        System.out.println("\b\b]");
     }
 
-    public void getPatientDetail() {
-        PatientQueue.array
+    public void remove() {
+        int[] tempArray = new int[nextIndex - 1];
+        for (int i = 1; i < nextIndex; i++) {
+            tempArray[i - 1] = array[i];
+        }
+        nextIndex--;
+        array = tempArray;
+    }
+
+    public void remove(int startIndex, int endIndex) {
+        int numElementsToRemove = endIndex - startIndex;
+
+        int[] tempArray = new int[nextIndex - numElementsToRemove];
+
+        for (int i = 0; i < startIndex; i++) {
+            tempArray[i] = array[i];
+        }
+
+        for (int i = endIndex; i < nextIndex; i++) {
+            tempArray[i - numElementsToRemove] = array[i];
+        }
+
+        array = tempArray;
+        nextIndex -= numElementsToRemove;
     }
 
 }
 
 class Demo {
     public static void main(String args[]) {
-        PatientQueue queue = new PatientQueue();
-        queue.enQueue(new Patient(101, "Amal"));
-        queue.enQueue(new Patient(102, "Nimal"));
-        queue.enQueue(new Patient(103, "Ramal"));
-        queue.enQueue(new Patient(104, "Bimal"));
-        queue.printQueue(); // {[101-Amal], [102-Niaml], [103-Ramal], [104-Bimal]}
-        Patient firstPatient = queue.deQueue();
-        System.out.println(firstPatient.getPatientDetail()); // [1001-Amal]
-        // queue.printQueue(); // {[102-Niaml], [103-Ramal], [104-Bimal]}
-        // System.out.println("No of patient of the queue : " + queue.size()); // 3
-        // queue.clear();
-        // queue.printQueue(); // {Empty}
-        // System.out.println("No of patient of the queue : " + queue.size()); // 0
+        Registry reg = new Registry(100); //
+        reg.add(10);
+        reg.add(20);
+        reg.add(30);
+        reg.add(40);
+        reg.printRegistry(); // [10,20,30,40]
+        reg.remove(); // remove the first element
+        reg.printRegistry(); // [20,30,40]
+        reg.add(1, 25);// add(int index, int data)
+        reg.printRegistry(); // [20,25,30,40]
+        reg.add(new int[] { 100, 200, 300, 400 }); // add(int[] data)
+        reg.printRegistry(); // [20,25,30,40,100,200,300,400]
+        reg.remove(1); // remove(int index)
+        reg.printRegistry(); // [20,30,40,100,200,300,400]
+        reg.add(3, new int[] { 1, 2, 3 }); // add(int index, int[] data)
+        reg.printRegistry(); // [20,30,40,1,2,3,100,200,300,400]
+        reg.remove(3, 6); // remove(int startIndex, int endIndex-1)
+        reg.printRegistry(); // [20,30,40,100,200,300,400]
     }
 }
