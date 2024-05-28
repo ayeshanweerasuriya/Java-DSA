@@ -1,111 +1,61 @@
-import java.util.*;
+class PriorityQueue {
+    private int[] array;
+    private int nextIndex;
 
-class Queue {
-    private Node front;
+    public PriorityQueue() {
+        array = new int[2];
+        nextIndex = 0;
+    }
 
-    public void enQueue(int data) {
-        Node n1 = new Node(data);
-        if (front == null) {
-            front = n1;
-        } else {
-            Node temp = front;
-            while (temp.next != null) {
-                temp = temp.next;
+    public void enQueue(int value) {
+        if (array.length <= nextIndex) {
+            extendArray();
+        }
+
+        array[nextIndex++] = value;
+    }
+
+    public void extendArray() {
+        int[] tempArray = new int[nextIndex * 2];
+
+        for (int i = 0; i < array.length; i++) {
+            tempArray[i] = array[i];
+        }
+
+        array = tempArray;
+    }
+
+    public void sortArray() {
+        int highestValue = array[0];
+        for (int i = 0; i < nextIndex; i++) {
+            if (array[i] > highestValue) {
+                highestValue = array[i];
             }
-            temp.next = n1;
         }
-    }
-
-    public boolean isEmpty() {
-        return front == null;
-    }
-
-    public int size() {
-        Node temp = front;
-        int count = 0;
-        while (temp != null) {
-            temp = temp.next;
-            count++;
-        }
-        return count;
     }
 
     public void printQueue() {
         System.out.print("[");
-        Node temp = front;
-        while (temp != null) {
-            System.out.print(temp.data + ", ");
-            temp = temp.next;
+        for (int i = 0; i < nextIndex; i++) {
+            System.out.print(array[i] + ", ");
         }
-        System.out.println(isEmpty() ? "empty]" : "\b\b]");
-    }
-
-    public void deQueue() {
-        front = front.next;
-    }
-
-    public void clear() {
-        front = null;
-    }
-
-    public int peek() {
-        return isEmpty() ? -1 : front.data;
-    }
-
-    public int search(int data) {
-        Node temp = front;
-        int index = -1;
-        while (temp != null) {
-            index++;
-            if (temp.data == data) {
-                return index;
-            }
-            temp = temp.next;
-        }
-        return index;
-    }
-
-    public int[] toArray() {
-        int[] tempDataArray = new int[size()];
-        Node temp = front;
-        for (int i = 0; i < tempDataArray.length; i++) {
-            tempDataArray[i] = temp.data;
-            temp = temp.next;
-        }
-        return tempDataArray;
-    }
-
-    public int poll() {
-        if (isEmpty()) {
-            return -1;
-        }
-        int data = front.data;
-        deQueue();
-        return data;
-    }
-
-    class Node {
-        private int data;
-        private Node next;
-
-        Node(int data) {
-            this.data = data;
-        }
+        System.out.print("\b\b]");
     }
 }
 
 class Demo {
     public static void main(String args[]) {
-        Queue q1 = new Queue();
-        q1.enQueue(10);
-        q1.enQueue(20);
-        q1.enQueue(30);
-        q1.enQueue(40);
-        q1.enQueue(50);
-        q1.printQueue();// [10,20,30,40,50]
-
-        q1.deQueue();
-        q1.printQueue();// [20,30,40,50]
-
+        PriorityQueue pq = new PriorityQueue();
+        pq.enQueue(12);
+        pq.enQueue(90);
+        pq.enQueue(16);
+        pq.enQueue(45);
+        pq.enQueue(96);
+        pq.enQueue(23);
+        pq.printQueue(); // [96, 16, 12, 90, 45, 23]
+        // pq.deQueue();
+        // pq.printQueue(); // [90, 16, 23, 45, 12]
+        // pq.deQueue();
+        // pq.printQueue(); // [45, 16, 23, 12]
     }
 }
