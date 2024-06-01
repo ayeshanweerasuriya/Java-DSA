@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.*;
 class Stack{
 	private Node top;
@@ -110,3 +111,27 @@ class Demo{
 		System.out.println(Arrays.toString(ar)); //[50,40,30,20,10]
 	}
 }
+=======
+class Stack {
+    public void push(int value) {
+        Node n1 = new Node(value);
+        n1.next = n1;
+    }
+}
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+    }
+}
+
+class Demo {
+    public static void main(String[] args) {
+        Stack s1 = new Stack();
+        s1.push(10);
+    }
+}
+>>>>>>> 623e2d1ed25842154beda4602b43b0461419e4eb
