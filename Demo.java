@@ -1,17 +1,45 @@
 import java.util.*;
-class Stack{
-	private Node top;
+class List{
+	private Node start;
 	
-	public void push(int data){
+	public void add(int index, int data){
+		Node n1 = new Node(data);
+		int localIndex = 0;
+		if (isEmpty()) {
+			start = n1;
+			localIndex++;
+		} else {
+			Node temp = start;
+			while (temp.next != null) {
+				if (localIndex == index) {
+					temp.next = n1;
+				}
+				localIndex++;
+			}
+		}
+	}
+	public int get(int index){
+		return -1;
+	}
+	public void remove(int index){
+	}	
+	public void add(int data){
 		Node n1=new Node(data);
-		n1.next=top;
-		top=n1;
+		if(start==null){
+			start=n1;
+		}else{
+			Node temp=start;
+			while(temp.next!=null){
+				temp=temp.next;
+			}
+			temp.next=n1;
+		}
 	}
 	public boolean isEmpty(){
-		return top==null;
+		return start==null;
 	}
 	public int size(){
-		Node temp=top;
+		Node temp=start;
 		int count=0;
 		while(temp!=null){
 			temp=temp.next;
@@ -19,94 +47,75 @@ class Stack{
 		}
 		return count;
 	}
-	public void printStack(){
+	public void printList(){
 		System.out.print("[");
-		Node temp=top;
+		Node temp=start;
 		while(temp!=null){
 			System.out.print(temp.data+", ");
 			temp=temp.next;
 		}
 		System.out.println(isEmpty()? "empty]":"\b\b]");
 	}
-	public void pop(){
-		top=top.next;
-	}
+
 	public void clear(){
-		top=null;
-	}
-	public int peek(){
-		return isEmpty() ? -1: top.data;
-	}
-	public int poll(){
-		if(isEmpty()){
-			return -1;
-		}
-		int data=top.data;
-		pop();
-		return data;
+		start=null;
 	}
 
-    public int search(int value) {
-        int index = 0;
-        Node temp = top;
-        if (temp == null) {
-            return -1;
-        }
-        
-        while (temp != null) {
-			if (temp.data == value) {
+	public int search(int data){
+		Node temp=start;
+		int index=-1;
+		while(temp!=null){
+			index++;
+			if(temp.data==data){
 				return index;
-			} else {
-				index++;
-				temp = temp.next;
 			}
-        }
-
-		return -1;
-    }
-
-	public int[] toArray() {
-		Node temp = top;
-		int[] array = new int[size()];
-
-		if (temp != null) {
-			for (int i = 0; i < size(); i++) {
-				array[i] = temp.data;
-				temp = temp.next;
-			}
+			temp=temp.next;
 		}
-		return array;
+		return index;
 	}
-	
-	// node as a inner class
+	public int[] toArray(){
+		int[] tempDataArray=new int[size()];
+		Node temp=start;
+		for (int i = 0; i < tempDataArray.length; i++){
+			tempDataArray[i]=temp.data;
+			temp=temp.next;
+		}
+		return tempDataArray;
+	}
 	class Node{
 		private int data;
 		private Node next;
-		private Node(int data){
+		Node(int data){
 			this.data=data;
 		}
 	}
 }
 class Demo{
 	public static void main(String args[]){
-		Stack s1=new Stack();
-		s1.push(10);
-		s1.push(20);
-		s1.push(30);
-		s1.push(40);
-		s1.push(50);
-		s1.printStack(); //[50,40,30,20,10]
-		System.out.println();
+		List list1=new List();
+		list1.add(10);
+		list1.add(20);
+		list1.add(30);
+		list1.add(40);
+		list1.add(50);
+		list1.printList(); //[10,20,30,40,50];
 		
-		int index=s1.search(20);
-		System.out.println("Index of 20 : "+index); //3
-		System.out.println();
+		list1.add(2,222);
+		list1.printList(); //[10,20,222,30,40,50];
 		
-		index=s1.search(99);
-		System.out.println("Index of 99 : "+index); //-1
-		System.out.println();
+		list1.add(0,9);
+		list1.printList(); //[9,10,20,222,30,40,50];
 		
-		int[] ar=s1.toArray();
-		System.out.println(Arrays.toString(ar)); //[50,40,30,20,10]
+		list1.add(list1.size()-1, 60);
+		list1.printList(); //[9,10,20,222,30,40,50,60];
+		
+		list1.remove(list1.size()-1);
+		list1.printList(); //[9,10,20,222,30,40,50];
+		
+		list1.remove(0);
+		list1.printList(); //[10,20,222,30,40,50];
+		
+		list1.remove(2);
+		list1.printList(); //[10,20,30,40,50];
 	}
 }
