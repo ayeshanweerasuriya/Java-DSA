@@ -25,6 +25,7 @@ class Helicopter extends JFrame implements Observer {
         areaLabel.setBounds(10, 10, 150, 25);
         this.add(areaLabel); // Add the JLabel to the frame
         this.setLayout(null); // Use null layout for absolute positioning
+        this.setVisible(true);
     }
 
     @Override
@@ -52,6 +53,7 @@ class Tank extends JFrame implements Observer {
         areaLabel.setBounds(10, 10, 150, 25);
         this.add(areaLabel); // Add the JLabel to the frame
         this.setLayout(null); // Use null layout for absolute positioning
+        this.setVisible(true);
     }
 
     @Override
@@ -75,6 +77,7 @@ class MainController extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setVisible(true);
 
         JCheckBox areaClearCheckbox = new JCheckBox("Area Clear");
         areaClearCheckbox.setBounds(50, 10, 100, 25); // Adjusted bounds
@@ -113,16 +116,9 @@ class MainController extends JFrame {
 public class Main {
     public static void main(String[] args) {
         MainController controller = new MainController();
-        Helicopter helicopter = new Helicopter();
-        Tank tank = new Tank();
 
         // Add observers to the controller
-        controller.addObserver(helicopter);
-        controller.addObserver(tank);
-
-        // Make all frames visible
-        controller.setVisible(true);
-        helicopter.setVisible(true);
-        tank.setVisible(true);
+        controller.addObserver(new Helicopter());
+        controller.addObserver(new Tank());
     }
 }
