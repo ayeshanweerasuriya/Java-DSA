@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,11 +29,7 @@ class Helicopter extends JFrame implements Observer {
 
     @Override
     public void update(boolean isAreaCleared) {
-        if (isAreaCleared) {
-            areaLabel.setText("Area is Cleared");
-        } else {
-            areaLabel.setText("Area Not Cleared");
-        }
+        areaLabel.setText(isAreaCleared ? "Area is Cleared" : "Area Not Cleared");
     }
 }
 
@@ -58,11 +53,31 @@ class Tank extends JFrame implements Observer {
 
     @Override
     public void update(boolean isAreaCleared) {
-        if (isAreaCleared) {
-            areaLabel.setText("Area is Cleared");
-        } else {
-            areaLabel.setText("Area Not Cleared");
-        }
+        areaLabel.setText(isAreaCleared ? "Area is Cleared" : "Area Not Cleared");
+    }
+}
+
+// Implement the Tank class that implements Observer
+class Submarine extends JFrame implements Observer {
+    JLabel areaLabel;
+
+    Submarine() {
+        this.setTitle("Submarine");
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(300, 300);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        areaLabel = new JLabel(); // Initialize the JLabel
+        areaLabel.setText("Area Not Cleared");
+        areaLabel.setBounds(10, 10, 150, 25);
+        this.add(areaLabel); // Add the JLabel to the frame
+        this.setLayout(null); // Use null layout for absolute positioning
+        this.setVisible(true);
+    }
+
+    @Override
+    public void update(boolean isAreaCleared) {
+        areaLabel.setText(isAreaCleared ? "Area is Cleared" : "Area Not Cleared");
     }
 }
 
@@ -120,5 +135,6 @@ public class Main {
         // Add observers to the controller
         controller.addObserver(new Helicopter());
         controller.addObserver(new Tank());
+        controller.addObserver(new Submarine());
     }
 }
