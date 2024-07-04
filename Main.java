@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 // Define the Observer interface
 interface Observer {
@@ -12,8 +10,10 @@ interface Observer {
 class Helicopter extends JFrame implements Observer {
 
     JLabel areaLabel;
+    MainController controller;
 
-    Helicopter() {
+    Helicopter(MainController controller) {
+        this.controller = controller; // Initialize the MainController reference
         this.setTitle("Helicopter");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(300, 300);
@@ -24,6 +24,14 @@ class Helicopter extends JFrame implements Observer {
         areaLabel.setBounds(10, 10, 150, 25);
         this.add(areaLabel); // Add the JLabel to the frame
         this.setLayout(null); // Use null layout for absolute positioning
+
+        JButton sendMessageButton = new JButton("Send Message");
+        sendMessageButton.setBounds(10, 50, 150, 25);
+        sendMessageButton.addActionListener(e -> {
+            controller.receiveMessage("Message from Helicopter");
+        });
+        this.add(sendMessageButton);
+
         this.setVisible(true);
     }
 
@@ -125,6 +133,11 @@ class MainController extends JFrame {
             observer.update(clicked);
         }
     }
+
+    // Method to receive a message from an observer
+    public void receiveMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
 }
 
 // Main class to test the functionality
@@ -133,7 +146,7 @@ public class Main {
         MainController controller = new MainController();
 
         // Add observers to the controller
-        controller.addObserver(new Helicopter());
+        controller.addObserver(new Helicopter(controller));
         controller.addObserver(new Tank());
         controller.addObserver(new Submarine());
     }
